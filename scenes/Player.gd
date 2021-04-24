@@ -1,5 +1,6 @@
 class_name Player extends KinematicBody2D
 
+signal throw_dirt
 
 export(float) var j_duration := .5
 export(float) var j_tiles := 3.0
@@ -16,6 +17,9 @@ func _init():
 	var h = j_tiles * 16.0
 	gravity.y = 2 * (h / d)
 	jump = (h / d) * j_duration
+
+func play(what: String) -> void:
+	$AnimationPlayer.play("dig")
 
 func _process(delta):
 	if Input.is_action_just_pressed("move_left"):
@@ -34,6 +38,11 @@ func pivot_left(left: bool) -> void:
 	$RayStep.scale.x = s
 	$RayStep2.scale.x = s
 	$RayHead.scale.x = s
+
+func get_throw_vectors() -> Array:
+	var p = $Pivot/Dirt.global_position
+	var d = $Pivot/Dirt/Throw.global_position - p
+	return [p, d.normalized() * 400]
 
 func _physics_process(delta):
 	

@@ -1,15 +1,58 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/spade.png" type="Texture" id=3]
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 13.0
 height = 24.0
 
 [sub_resource type="RayShape2D" id=2]
 custom_solver_bias = 0.014
 length = 16.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "dig"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/SpadePivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, -7.25 ), Vector2( 12.25, -21.5 ), Vector2( -2.75, -21.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/SpadePivot:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -114.474, 0.0 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "throw_dirt" ],
+"method": "emit_signal"
+} ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 186.54, 196.314 )
@@ -22,9 +65,23 @@ position = Vector2( 0, -30 )
 scale = Vector2( 0.42, 0.9 )
 texture = ExtResource( 2 )
 
+[node name="Dirt" type="Position2D" parent="Pivot"]
+position = Vector2( 20, -10 )
+
+[node name="Throw" type="Position2D" parent="Pivot/Dirt"]
+position = Vector2( 35, -19.25 )
+
+[node name="SpadePivot" type="Node2D" parent="Pivot"]
+position = Vector2( -2.75, -21.5 )
+
+[node name="spade" type="Sprite" parent="Pivot/SpadePivot"]
+position = Vector2( 2.25, 7.25 )
+rotation = 2.87979
+texture = ExtResource( 3 )
+
 [node name="Capsule" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -34 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Floor" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -16 )
@@ -54,3 +111,6 @@ cast_to = Vector2( 32, 0 )
 position = Vector2( 0, -24 )
 enabled = true
 cast_to = Vector2( 32, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/dig = SubResource( 3 )
