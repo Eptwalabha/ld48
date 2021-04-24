@@ -18,8 +18,6 @@ func _init():
 	jump = (h / d) * j_duration
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
 	if Input.is_action_just_pressed("move_left"):
 		pivot_left(true)
 		$Pivot.scale.x = -1
@@ -29,7 +27,6 @@ func _process(delta):
 	
 	if is_jumping and Input.is_action_just_released("move_jump"):
 		is_jumping = false
-	
 
 func pivot_left(left: bool) -> void:
 	var s: float = -1.0 if left else 1.0
