@@ -1,0 +1,9 @@
+.*.swp
+.~lock*
+.import/
+export.cfg
+export_presets.cfg
+exports/
+
+*.translation
+*.png~
