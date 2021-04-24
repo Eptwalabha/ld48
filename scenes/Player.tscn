@@ -221,12 +221,12 @@ cast_to = Vector2( 32, 0 )
 [node name="FloorL" type="RayCast2D" parent="."]
 position = Vector2( -10, 0 )
 enabled = true
-cast_to = Vector2( 0, 10 )
+cast_to = Vector2( 0, 3 )
 
 [node name="FloorR" type="RayCast2D" parent="."]
 position = Vector2( 10, 0 )
 enabled = true
-cast_to = Vector2( 0, 10 )
+cast_to = Vector2( 0, 3 )
 
 [node name="RayHead" type="RayCast2D" parent="."]
 position = Vector2( 0, -60 )

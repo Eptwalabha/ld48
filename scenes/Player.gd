@@ -71,8 +71,7 @@ func _physics_process(delta):
 	if is_realy_on_floor() and Input.is_action_just_pressed("move_jump"):
 		velocity.y -= jump
 	
-	if ! is_realy_on_floor():
-		velocity += gravity * delta
+	velocity += gravity * delta
 
 	velocity = move_and_slide(velocity, Vector2.UP)
 

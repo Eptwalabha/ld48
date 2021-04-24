@@ -35,6 +35,11 @@ date: 2021-04-24"
 run/main_scene="res://scenes/levels/LevelBase.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/resizable=false
+window/stretch/aspect="keep"
+
 [global]
 
 browser=false

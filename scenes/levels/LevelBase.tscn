@@ -1,15 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/ressources/tileset-block.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/LevelBase.gd" type="Script" id=3]
 [ext_resource path="res://scenes/DirtBlock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/images/tuto.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="LevelBase" type="Node2D"]
 script = ExtResource( 3 )
 Block = ExtResource( 4 )
+
+[node name="Tuto" type="Sprite" parent="."]
+position = Vector2( 219.026, 282.135 )
+scale = Vector2( 0.497954, 0.497954 )
+texture = ExtResource( 5 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
