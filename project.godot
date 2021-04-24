@@ -35,6 +35,10 @@ date: 2021-04-24"
 run/main_scene="res://scenes/levels/LevelBase.tscn"
 config/icon="res://icon.png"
 
+[global]
+
+browser=false
+
 [input]
 
 move_left={

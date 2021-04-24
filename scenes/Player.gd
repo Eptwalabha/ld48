@@ -5,21 +5,27 @@ signal throw_dirt
 export(float) var j_duration := .5
 export(float) var j_tiles := 3.0
 
+onready var anim_tree : AnimationTree = $AnimationTree
+var state_machine: AnimationNodeStateMachinePlayback
+
 var gravity : Vector2 = Vector2(0, 4062);
 var velocity: Vector2 = Vector2.ZERO
 const speed: float = 16.0 * 20.0
 var jump: float = 1015.0
 var is_jumping: bool = false
 
-func _init():
+func _ready():
+	state_machine = anim_tree.get("parameters/playback")
 	var hj = j_duration / 2.0
 	var d = -pow(hj, 2) + hj * j_duration
 	var h = j_tiles * 16.0
 	gravity.y = 2 * (h / d)
 	jump = (h / d) * j_duration
 
-func play(what: String) -> void:
-	$AnimationPlayer.play("dig")
+func dig() -> void:
+	if is_digging():
+		return
+	state_machine.travel("dig")
 
 func _process(delta):
 	if Input.is_action_just_pressed("move_left"):
@@ -44,11 +50,17 @@ func get_throw_vectors() -> Array:
 	var d = $Pivot/Dirt/Throw.global_position - p
 	return [p, d.normalized() * 400]
 
+func is_digging() -> bool:
+	return state_machine.get_current_node() == "dig"
+
 func _physics_process(delta):
 	
 	var dir: float = 0.0;
-	dir -= float(Input.is_action_pressed("move_left"))
-	dir += float(Input.is_action_pressed("move_right"))
+	if !is_digging():
+		dir -= float(Input.is_action_pressed("move_left"))
+		dir += float(Input.is_action_pressed("move_right"))
+		if dir != 0.0:
+			state_machine.travel("move")
 	
 #	if dir != 0 and is_realy_on_floor() and $RayStep.is_colliding():
 #		if not ($RayHead.is_colliding() or $RayStep2.is_colliding()):

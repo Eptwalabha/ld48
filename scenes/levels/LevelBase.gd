@@ -11,7 +11,6 @@ func start_level() -> void:
 
 func _on_End_body_entered(body):
 	if body == $Player:
-		print("super")
 		start_level()
 
 func _process(_delta: float) -> void:
@@ -19,14 +18,7 @@ func _process(_delta: float) -> void:
 		get_tree().quit()
 	
 	if Input.is_action_just_pressed("action"):
-		$Player.play("throw_dirt")
-		var p_position = $Player.global_position
-		var pos = $TileMap.world_to_map(p_position)
-		var block_type = $TileMap.get_cellv(pos)
-		if block_type != -1:
-			throw_block(pos, block_type)
-			$TileMap.set_cellv(pos, -1)
-			$TileMap.update_bitmask_area(pos)
+		$Player.dig()
 
 func throw_block(pos: Vector2, block_type: int) -> void:
 	var block = Block.instance()
@@ -42,3 +34,13 @@ func _on_block_hit_something(body: Node, block) -> void:
 		$TileMap.set_cellv(pos, block.type)
 		$TileMap.update_bitmask_area(pos)
 	block.queue_free()
+
+
+func _on_Player_throw_dirt():
+	var p_position = $Player.global_position
+	var pos = $TileMap.world_to_map(p_position)
+	var block_type = $TileMap.get_cellv(pos)
+	if block_type != -1:
+		throw_block(pos, block_type)
+		$TileMap.set_cellv(pos, -1)
+		$TileMap.update_bitmask_area(pos)
