@@ -51,14 +51,16 @@ func _on_block_sleep(block) -> void:
 
 func _on_Player_throw_dirt():
 	var p_position = $Player.global_position + Vector2(0.0, 8.0)
-	var cell_index = get_next_available_block(p_position, get_global_mouse_position(), 0)
-	var cell_id = $TileMap.get_cellv(cell_index)
-	if cell_id != -1:
-		throw_block(cell_index, cell_id)
-		$TileMap.set_cellv(cell_index, -1)
-		$TileMap.update_bitmask_area(cell_index)
+	match get_next_available_block(p_position, get_global_mouse_position(), 0):
+		null: return
+		var cell_index:
+			var cell_id = $TileMap.get_cellv(cell_index)
+			if cell_id != -1:
+				throw_block(cell_index, cell_id)
+				$TileMap.set_cellv(cell_index, -1)
+				$TileMap.update_bitmask_area(cell_index)
 
-func get_next_available_block(world_position: Vector2, world_mouse: Vector2, spade_type: int) -> Vector2:
+func get_next_available_block(world_position: Vector2, world_mouse: Vector2, spade_type: int):
 	var cell_index = $TileMap.world_to_map(world_position)
 	var mouse_position = $TileMap.world_to_map(world_mouse)
 	var left = world_mouse.x > world_position.x
@@ -69,7 +71,7 @@ func get_next_available_block(world_position: Vector2, world_mouse: Vector2, spa
 			var cell_id = $TileMap.get_cellv(cell)
 			if cell_id != -1 and is_shovel_strong_enough(spade_type, cell_id):
 				return cell
-	return cell_index
+	return null
 
 func is_shovel_strong_enough(spade_type: int, cell_id: int) -> bool:
 	var name = $TileMap.tile_set.tile_get_name(cell_id)
