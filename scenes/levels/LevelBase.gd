@@ -23,11 +23,12 @@ func _process(_delta: float) -> void:
 func throw_block(pos: Vector2, block_type: int) -> void:
 	var block = Block.instance()
 	var throw : Array = $Player.get_throw_vectors()
-	block.initialize(throw[0], throw[1], block_type)
 	add_child(block)
+	block.initialize(throw[0], throw[1], block_type)
 	block.connect("body_entered", self, "_on_block_hit_something", [block])
+	block.connect("sleeping_state_changed", self, "_on_block_sleep", [block])
 
-func _on_block_hit_something(body: Node, block) -> void:
+func solidify_block(block) -> void:
 	var p_position = block.global_position
 	var pos = $TileMap.world_to_map(p_position)
 	if $TileMap.get_cellv(pos) == -1:
@@ -35,6 +36,12 @@ func _on_block_hit_something(body: Node, block) -> void:
 		$TileMap.update_bitmask_area(pos)
 	block.queue_free()
 
+func _on_block_hit_something(body: Node, block) -> void:
+	solidify_block(block)
+
+func _on_block_sleep(block) -> void:
+	if block.is_sleeping():
+		solidify_block(block)
 
 func _on_Player_throw_dirt():
 	var p_position = $Player.global_position

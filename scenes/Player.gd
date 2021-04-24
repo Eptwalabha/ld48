@@ -48,7 +48,7 @@ func pivot_left(left: bool) -> void:
 func get_throw_vectors() -> Array:
 	var p = $Pivot/Dirt.global_position
 	var d = $Pivot/Dirt/Throw.global_position - p
-	return [p, d.normalized() * 400]
+	return [p, d.normalized() * 800]
 
 func is_digging() -> bool:
 	return state_machine.get_current_node() == "dig"

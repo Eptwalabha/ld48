@@ -1,14 +1,19 @@
-extends Area2D
+extends RigidBody2D
 
-var g : Vector2 = Vector2(0, 4062)
-var velocity: Vector2 = Vector2.ZERO
-var type: int = 0
+var type : int = 0
+var motionless : int = 0
+var first_impulse : Vector2 = Vector2.ZERO
 
-func initialize(pos: Vector2, vel: Vector2, block_type: int) -> void:
-	global_position = pos
-	velocity = vel
+func initialize(new_position: Vector2, impulse: Vector2, block_type: int) -> void:
+	global_position = new_position
 	type = block_type
+	# apply_torque_impulse does not work for some reason.
+	apply_torque_impulse(randf() * 360.0 - 180.0)
+	apply_central_impulse(impulse)
 
 func _physics_process(delta):
-	velocity += g * delta
-	global_position += velocity * delta
+	if linear_velocity.length() < 20:
+		motionless += 1
+		if motionless > 20:
+			sleeping = true
+			emit_signal("sleeping_state_changed")
