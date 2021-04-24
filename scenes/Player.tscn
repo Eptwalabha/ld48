@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -119,6 +119,35 @@ tracks/3/keys = {
 "values": [ Vector2( -2.75, -21.5 ) ]
 }
 
+[sub_resource type="Animation" id=15]
+resource_name = "jump"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/SpadePivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18.4645, -32.1634 ), Vector2( -20.715, -32.9901 ), Vector2( -14.8166, -32.1879 ), Vector2( -18.4645, -32.1634 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/SpadePivot:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 27.761, 7.11502, 27.761 ]
+}
+
 [sub_resource type="Animation" id=8]
 resource_name = "move"
 length = 0.8
@@ -154,6 +183,9 @@ animation = "dig"
 [sub_resource type="AnimationNodeAnimation" id=9]
 animation = "idle"
 
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "jump"
+
 [sub_resource type="AnimationNodeAnimation" id=10]
 animation = "move"
 
@@ -164,17 +196,30 @@ switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=13]
+advance_condition = "moving"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=14]
+advance_condition = "not_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+advance_condition = "grounded"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+advance_condition = "not_grounded"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+advance_condition = "not_grounded"
 
 [sub_resource type="AnimationNodeStateMachine" id=6]
 states/dig/node = SubResource( 5 )
-states/dig/position = Vector2( 566, 67 )
+states/dig/position = Vector2( 594, 81 )
 states/idle/node = SubResource( 9 )
 states/idle/position = Vector2( 231, 81 )
+states/jump/node = SubResource( 16 )
+states/jump/position = Vector2( 594, 198 )
 states/move/node = SubResource( 10 )
-states/move/position = Vector2( 356, 180 )
-transitions = [ "idle", "dig", SubResource( 11 ), "dig", "idle", SubResource( 12 ), "idle", "move", SubResource( 13 ), "move", "idle", SubResource( 14 ) ]
+states/move/position = Vector2( 231, 198 )
+transitions = [ "idle", "dig", SubResource( 11 ), "dig", "idle", SubResource( 12 ), "idle", "move", SubResource( 13 ), "move", "idle", SubResource( 14 ), "jump", "idle", SubResource( 18 ), "idle", "jump", SubResource( 19 ), "move", "jump", SubResource( 20 ) ]
 start_node = "idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=7]
@@ -198,7 +243,11 @@ position = Vector2( 5, -10 )
 position = Vector2( 35, -19.25 )
 
 [node name="SpadePivot" type="Node2D" parent="Pivot"]
-position = Vector2( -2.75, -21.5 )
+position = Vector2( -15.2464, -32.185 )
+rotation = 0.29379
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="spade" type="Sprite" parent="Pivot/SpadePivot"]
 position = Vector2( 2.25, 7.25 )
@@ -241,6 +290,7 @@ cast_to = Vector2( 32, 0 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/dig = SubResource( 3 )
 anims/idle = SubResource( 4 )
+anims/jump = SubResource( 15 )
 anims/move = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -248,3 +298,7 @@ tree_root = SubResource( 6 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 7 )
+parameters/conditions/grounded = false
+parameters/conditions/moving = false
+parameters/conditions/not_grounded = false
+parameters/conditions/not_moving = false

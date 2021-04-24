@@ -60,21 +60,26 @@ func _physics_process(delta):
 	if !is_digging():
 		dir -= float(Input.is_action_pressed("move_left"))
 		dir += float(Input.is_action_pressed("move_right"))
-		if dir != 0.0:
-			state_machine.travel("move")
-	
+
 #	if dir != 0 and is_realy_on_floor() and $RayStep.is_colliding():
 #		if not ($RayHead.is_colliding() or $RayStep2.is_colliding()):
 #			velocity.y -= 200
-	
+
 	velocity.x = dir * speed
-	
+
 	if is_realy_on_floor() and Input.is_action_just_pressed("move_jump"):
 		velocity.y -= jump
-	
+
+
 	velocity += gravity * delta
 
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+	var grounded = is_realy_on_floor()
+	anim_tree["parameters/conditions/grounded"] = grounded
+	anim_tree["parameters/conditions/not_grounded"] = !grounded
+	anim_tree["parameters/conditions/moving"] = dir != 0.0
+	anim_tree["parameters/conditions/not_moving"] = dir == 0.0
 
 func is_realy_on_floor() -> bool:
 	return is_on_floor() or $FloorL.is_colliding() or $FloorR.is_colliding()
