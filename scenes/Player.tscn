@@ -243,8 +243,8 @@ position = Vector2( 5, -10 )
 position = Vector2( 35, -19.25 )
 
 [node name="SpadePivot" type="Node2D" parent="Pivot"]
-position = Vector2( -15.2464, -32.185 )
-rotation = 0.29379
+position = Vector2( -17.1375, -32.1723 )
+rotation = 0.405874
 __meta__ = {
 "_edit_group_": true
 }

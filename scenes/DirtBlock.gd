@@ -10,6 +10,7 @@ func initialize(new_position: Vector2, impulse: Vector2, block_type: int) -> voi
 	# apply_torque_impulse does not work for some reason.
 	apply_torque_impulse(randf() * 360.0 - 180.0)
 	apply_central_impulse(impulse)
+	$SandParticle.emitting = true
 
 func _physics_process(delta):
 	if linear_velocity.length() < 20:
