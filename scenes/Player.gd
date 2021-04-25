@@ -1,5 +1,6 @@
 class_name Player extends KinematicBody2D
 
+# warning-ignore:unused_signal
 signal throw_dirt
 
 export(float) var j_duration := .5
@@ -37,7 +38,7 @@ func is_moving() -> bool:
 func get_tool() -> int:
 	return 0
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("move_left"):
 		pivot_left(true)
 		$Pivot.scale.x = -1

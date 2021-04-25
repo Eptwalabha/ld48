@@ -12,7 +12,7 @@ func initialize(new_position: Vector2, impulse: Vector2, block_type: int) -> voi
 	apply_central_impulse(impulse)
 	$SandParticle.emitting = true
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if linear_velocity.length() < 20:
 		motionless += 1
 		if motionless > 20:

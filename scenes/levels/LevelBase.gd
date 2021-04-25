@@ -22,7 +22,7 @@ func _process(_delta: float) -> void:
 
 	update_block_selector()
 
-func throw_block(pos: Vector2, block_type: int) -> void:
+func throw_block(block_type: int) -> void:
 	var block = Block.instance()
 	var throw : Array = $Player.get_throw_vectors()
 	add_child(block)
@@ -68,7 +68,7 @@ func update_block_selector() -> void:
 			cursor.update_cursor($TileMap.to_global(cell_position) + Vector2(8.0, 8.0), 1)
 			cursor.cell_index = cell_index
 
-func _on_block_hit_something(body: Node, block) -> void:
+func _on_block_hit_something(_body: Node, block) -> void:
 	solidify_block(block)
 
 func _on_block_sleep(block) -> void:
@@ -83,13 +83,12 @@ func _on_Player_throw_dirt():
 		var cell_index:
 			var cell_id = $TileMap.get_cellv(cell_index)
 			if cell_id != -1:
-				throw_block(cell_index, cell_id)
+				throw_block(cell_id)
 				$TileMap.set_cellv(cell_index, -1)
 				$TileMap.update_bitmask_area(cell_index)
 
 func get_next_available_block(world_position: Vector2, world_mouse: Vector2, spade_type: int):
 	var cell_index = $TileMap.world_to_map(world_position)
-	var mouse_position = $TileMap.world_to_map(world_mouse)
 	var left = world_mouse.x > world_position.x
 	for y in range(-2, 1):
 		for x in range(0, $Player.max_range):
@@ -103,9 +102,7 @@ func get_next_available_block(world_position: Vector2, world_mouse: Vector2, spa
 	return null
 
 func is_shovel_strong_enough(spade_type: int, cell_id: int) -> bool:
-	var name = $TileMap.tile_set.tile_get_name(cell_id)
-	match spade_type:
-		0: return ["sand"].has(name)
-		1: return ["sand", "dirt"].has(name)
-		2: return ["sand", "dirt", "stone"].has(name)
-		_: return false
+	match cell_id:
+		GameAutoload.BLOCK_TYPE.SAND: return true
+		GameAutoload.BLOCK_TYPE.DIRT: return spade_type > 0
+		_: return spade_type > 1

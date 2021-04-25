@@ -18,6 +18,5 @@ func update_cursor(cell_position: Vector2, new_type: int) -> void:
 		TYPE.INVALID:
 			$Sprite.frame = 2
 		_:
-			print(new_type)
 			type = TYPE.NONE
 			$Sprite.frame = 0

@@ -41,6 +41,10 @@ date: 2021-04-24"
 run/main_scene="res://scenes/levels/LevelBase.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameAutoload="*res://scenes/game-autoload.gd"
+
 [display]
 
 window/size/resizable=false
