@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "TileMap",
+"class": "BaseTilemap",
+"language": "GDScript",
+"path": "res://scenes/levels/tilemaps/BaseTilemap.gd"
+}, {
 "base": "Node2D",
 "class": "BlockSelector",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://scenes/Player.gd"
 } ]
 _global_script_class_icons={
+"BaseTilemap": "",
 "BlockSelector": "",
 "LevelBase": "",
 "Player": ""

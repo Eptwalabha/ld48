@@ -2,6 +2,9 @@ class_name LevelBase extends Node2D
 
 export(PackedScene) var Block
 onready var cursor: BlockSelector = $TileMap/BlockSelector
+onready var timer: Label = $CanvasLayer/Control2/Control/Timer
+
+var time: float = 60.0
 
 func _ready():
 	start_level()
@@ -13,13 +16,15 @@ func _on_End_body_entered(body):
 	if body == $Player:
 		start_level()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
 	
 	if Input.is_action_pressed("action"):
 		$Player.dig()
 
+	time -= delta
+	timer.text = "%.2f" % time
 	update_block_selector()
 	update_camera()
 

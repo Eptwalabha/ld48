@@ -15,11 +15,14 @@ var velocity: Vector2 = Vector2.ZERO
 const speed: float = 16.0 * 20.0
 var jump: float = 1015.0
 
-var is_jump_pressed: bool = false
 var is_grounded: bool = false
 var is_walking: bool = false
 var is_wallriding: bool = false
 var is_facing_left: bool = true
+
+var action_jump: bool = false
+var action_move_left: bool = false
+var action_move_right: bool = false
 
 func _ready():
 	state_machine = anim_tree.get("parameters/playback")
@@ -41,6 +44,7 @@ func get_tool() -> int:
 	return 0
 
 func _process(_delta):
+
 	if Input.is_action_just_pressed("move_left"):
 		pivot_left(true)
 		$Pivot.scale.x = -1
@@ -48,8 +52,12 @@ func _process(_delta):
 		pivot_left(false)
 		$Pivot.scale.x = 1
 
-	if is_jump_pressed and Input.is_action_just_released("move_jump"):
-		is_jump_pressed = false
+	if Input.is_action_just_pressed("move_jump"):
+		action_jump = true
+
+	action_move_left = Input.is_action_pressed("move_left")
+	action_move_right = Input.is_action_pressed("move_right")
+
 
 func pivot_left(left: bool) -> void:
 	var s: float = -1.0 if left else 1.0
@@ -66,18 +74,22 @@ func is_digging() -> bool:
 func _physics_process(delta):
 	
 	var dir: float = 0.0;
-	if !is_digging():
-		dir -= float(Input.is_action_pressed("move_left"))
-		dir += float(Input.is_action_pressed("move_right"))
-		is_facing_left = dir < 0
+	
+	if action_move_left or action_move_right:
+		if !is_digging():
+			dir -= int(action_move_left)
+			dir += int(action_move_right)
+			is_facing_left = dir < 0
 
 	velocity.x = dir * speed
 
-	if (is_realy_on_floor() or is_wallriding) and Input.is_action_just_pressed("move_jump"):
-		velocity.y -= jump
-		if is_wallriding:
-			velocity.y -= 200
-			is_wallriding = false
+	if action_jump:
+		action_jump = false
+		if (is_realy_on_floor() or is_wallriding):
+			velocity.y -= jump
+			if is_wallriding:
+				velocity.y -= 200
+				is_wallriding = false
 
 	velocity += gravity * delta * (.2 if is_wallriding else 1.0)
 

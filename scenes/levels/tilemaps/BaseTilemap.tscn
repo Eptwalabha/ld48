@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/ressources/tileset-block.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/levels/tilemaps/BaseTilemap.gd" type="Script" id=2]
+
+[node name="BaseTilemap" type="TileMap"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 23
+collision_layer = 2
+collision_mask = 0
+format = 1
+script = ExtResource( 2 )
+
+[node name="Start" type="Position2D" parent="."]

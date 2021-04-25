@@ -11,16 +11,10 @@ enum TOOL_TYPE {
 	EXPLOSIVE
 }
 
-enum SPADE_TYPE {
+enum TOOL_QUALITY {
 	BASIC,
 	NICE,
-	SUPER
-}
-
-enum BUCKET_TYPE {
-	BASIC,
-	NICE,
-	SANTA_CLAUSE
+	SUPER,
 }
 
 var player_money = 0
@@ -32,47 +26,53 @@ var player_tools = {
 
 var shop = {
 	"items": {
-		"spade": {
-			SPADE_TYPE.BASIC: {
+		"spade": [
+			{
 				"price": 10,
+				"quality": TOOL_QUALITY.BASIC,
 				"name": "basic",
 			},
-			SPADE_TYPE.NICE: {
+			{
 				"price": 100,
+				"quality": TOOL_QUALITY.NICE,
 				"name": "nice",
 			},
-			SPADE_TYPE.SUPER: {
+			{
 				"price": 300,
+				"quality": TOOL_QUALITY.SUPER,
 				"name": "super",
 			}
-		},
-		"bucket": {
-			BUCKET_TYPE.BASIC: {
+		],
+		"bucket": [
+			{
 				"price": 100,
+				"quality": TOOL_QUALITY.BASIC,
 				"name": "basic",
 			},
-			BUCKET_TYPE.NICE: {
+			{
 				"price": 300,
+				"quality": TOOL_QUALITY.NICE,
 				"name": "nice",
 			},
-			BUCKET_TYPE.SUPER: {
+			{
 				"price": 500,
+				"quality": TOOL_QUALITY.SUPER,
 				"name": "super",
 			}
-		},
-		"explosive": {
-			1: {
+		],
+		"explosive": [
+			{
 				"amount": 1,
 				"price": 5,
 			},
-			2: {
+			{
 				"amount": 5,
 				"price": 20,
 			},
-			3: {
+			{
 				"amount": 20,
 				"price": 70,
 			},
-		},
+		],
 	}
 }
