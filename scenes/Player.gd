@@ -3,7 +3,7 @@ class_name Player extends KinematicBody2D
 signal throw_dirt
 
 export(float) var j_duration := .5
-export(float) var j_tiles := 3.0
+export(float) var j_tiles := 5.0
 export(int) var max_range := 3
 
 onready var anim_tree : AnimationTree = $AnimationTree
