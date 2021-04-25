@@ -32,7 +32,7 @@ func get_blocks(position: Vector2, radius: float, filter: Array) -> Array:
 	for x in range(-radius, radius + 1):
 		for y in range(-radius, radius + 1):
 			var d = Vector2(x, y)
-			if float(abs(d.x) + abs(d.y)) > radius:
+			if float(abs(d.x) + abs(d.y)) >= radius:
 				continue
 			var p2 = p + d
 			var m = get_cellv(p2)

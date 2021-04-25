@@ -34,10 +34,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/levels/triggers/MapTrigger.gd"
 }, {
-"base": "Reference",
+"base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://scenes/player/Player.gd"
+}, {
+"base": "Node2D",
+"class": "Shovel",
+"language": "GDScript",
+"path": "res://scenes/player/tools/Shovel.gd"
 } ]
 _global_script_class_icons={
 "BaseTilemap": "",
@@ -45,7 +50,8 @@ _global_script_class_icons={
 "Level": "",
 "LevelBase": "",
 "MapTrigger": "",
-"Player": ""
+"Player": "",
+"Shovel": ""
 }
 
 [application]

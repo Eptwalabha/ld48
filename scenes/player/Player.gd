@@ -2,11 +2,15 @@ class_name Player extends KinematicBody2D
 
 # warning-ignore:unused_signal
 signal throw_dirt
-signal throw_dirt_shovel(from, direction)
+signal throw_dirt_shovel(from, direction, shovel)
 
 export(float) var j_duration := .5
 export(float) var j_tiles := 5.0
 export(int) var max_range := 3
+
+var shovel: Shovel = null
+
+var ShovelScene = preload("res://scenes/player/tools/Shovel.tscn")
 
 onready var anim_tree : AnimationTree = $AnimationTree
 onready var throw_position: Position2D = $Pivot/Dirt
@@ -27,12 +31,18 @@ var action_move_left: bool = false
 var action_move_right: bool = false
 
 func _ready():
+	initialize_tools()
 	state_machine = anim_tree.get("parameters/playback")
 	var hj = j_duration / 2.0
 	var d = -pow(hj, 2) + hj * j_duration
 	var h = j_tiles * 16.0
 	gravity.y = 2 * (h / d)
 	jump = (h / d) * j_duration
+
+func initialize_tools() -> void:
+	if GameAutoload.is_shovel_unlocked:
+		shovel = ShovelScene.instance()
+		shovel.initialize(GameAutoload.player_tools["shovel"])
 
 func dig() -> void:
 	if is_digging():
@@ -116,11 +126,13 @@ func is_realy_on_floor() -> bool:
 var initial_click: Vector2 = Vector2.ZERO
 
 func action_start(mouse: Vector2) -> void:
-	initial_click = mouse
+	if shovel is Shovel:
+		initial_click = mouse
 
 func action_end(mouse: Vector2) -> void:
-	var diff = (initial_click - mouse).length()
-	if diff < 16:
-		return
-	var direction = (mouse - $Pivot/Dirt/Throw.global_position).normalized() * 800
-	emit_signal("throw_dirt_shovel", initial_click, direction)
+	if shovel is Shovel:
+		var diff = (initial_click - mouse).length()
+		if diff < 16:
+			return
+		var direction = (mouse - $Pivot/Dirt/Throw.global_position).normalized() * 800
+		emit_signal("throw_dirt_shovel", initial_click, direction, shovel)
