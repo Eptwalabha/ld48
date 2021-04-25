@@ -1,4 +1,4 @@
-extends "res://scenes/levels/Level.gd"
+extends Level
 
 onready var context_label: Label = $CanvasLayer/ContextLabel
 var current_trigger : String = ""

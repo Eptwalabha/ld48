@@ -3,6 +3,7 @@ extends Node
 enum BLOCK_TYPE {
 	SAND = 6,
 	DIRT = 7,
+	STONE = 10,
 }
 
 enum TOOL_TYPE {

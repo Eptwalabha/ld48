@@ -250,7 +250,7 @@ scale = Vector2( 0.42, 0.9 )
 texture = ExtResource( 2 )
 
 [node name="Dirt" type="Position2D" parent="Pivot"]
-position = Vector2( 5, -10 )
+position = Vector2( 5, -32 )
 
 [node name="Throw" type="Position2D" parent="Pivot/Dirt"]
 position = Vector2( 35, -19.25 )

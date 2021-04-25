@@ -8,6 +8,7 @@ export(float) var j_tiles := 5.0
 export(int) var max_range := 3
 
 onready var anim_tree : AnimationTree = $AnimationTree
+onready var throw_position: Position2D = $Pivot/Dirt
 var state_machine: AnimationNodeStateMachinePlayback
 
 var gravity : Vector2 = Vector2(0, 4062);
@@ -43,8 +44,7 @@ func is_moving() -> bool:
 func get_tool() -> int:
 	return 0
 
-func _process(_delta):
-
+func process(_delat: float) -> void:
 	if Input.is_action_just_pressed("move_left"):
 		pivot_left(true)
 		$Pivot.scale.x = -1

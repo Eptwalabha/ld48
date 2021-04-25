@@ -18,3 +18,7 @@ func _physics_process(_delta):
 		if motionless > 20:
 			sleeping = true
 			emit_signal("sleeping_state_changed")
+
+func _on_Timer_timeout():
+	print("yo")
+	set_collision_mask_bit(5, true)
