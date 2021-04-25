@@ -39,8 +39,17 @@ func start_competition() -> void:
 	game_timer_label.show()
 
 func _process(_delta: float) -> void:
-	if game_start:
-		game_timer_label.text = "%.1f" % game_timer.time_left
+	if !game_start:
+		return
+	update_timer_label()
+	
+	if Input.is_action_just_pressed("action"):
+		player.action_start(get_global_mouse_position())
+	if Input.is_action_just_released("action"):
+		player.action_end(get_global_mouse_position())
+
+func update_timer_label() -> void:
+	game_timer_label.text = "%.1f" % game_timer.time_left
 
 func _on_StartupTimer_timeout():
 	sec_start -= 1
@@ -58,19 +67,19 @@ func _on_GameTimer_timeout():
 	game_start = false
 	can_control_player = false
 
-func _on_Player_throw_dirt():
-	var p_position = player.global_position - Vector2(0.0, 8.0)
+func _on_Player_throw_dirt_shovel(position: Vector2, direction: Vector2):
+#	var p_position = player.global_position - Vector2(0.0, 8.0)
 #	var p_tool = player.get_tool()
+	player.dig()
 	var filter_blocks = [
 		GameAutoload.BLOCK_TYPE.SAND,
 		GameAutoload.BLOCK_TYPE.DIRT,
 		GameAutoload.BLOCK_TYPE.STONE
 	]
-	p_position = get_global_mouse_position()
-	var blocks = map.get_blocks(p_position, 2, filter_blocks)
-#	var throw : Array = player.get_throw_vectors()
+	var radius = 2
+	var blocks = map.get_blocks(position, radius, filter_blocks)
 	var throw_position: Vector2 = player.throw_position.global_position
-	var direction = (get_global_mouse_position() - throw_position).normalized() * 800
+#	var direction = (get_global_mouse_position() - throw_position).normalized() * 800
 	var thread = Thread.new()
 	threads.push_back(thread)
 	var blocks_type = []
@@ -87,7 +96,7 @@ func _spawn_blocks(args) -> void:
 	for type in types:
 		yield(get_tree().create_timer(0.02), "timeout")
 		var physics_block = Block.instance()
-		var r = Vector2(randf() * 32.0 - 16.0, randf() * 32.0 - 16.0) * 10
+		var r = Vector2(randf() * 32.0 - 16.0, randf() * 32.0 - 16.0) * 5
 		map.add_block(physics_block)
 		physics_block.initialize(from, direction + r, type)
 	emit_signal("end_of_theard", args[3])

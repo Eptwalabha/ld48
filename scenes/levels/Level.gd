@@ -24,8 +24,6 @@ func _process(delta: float) -> void:
 	update_camera($Player)
 	if can_control_player:
 		$Player.process(delta)
-		if Input.is_action_just_pressed("action"):
-			player.dig()
 
 func update_camera(target: Node2D) -> void:
 	camera.position = target.global_position

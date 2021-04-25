@@ -56,6 +56,6 @@ __meta__ = {
 wait_time = 60.0
 
 [connection signal="end_of_theard" from="." to="." method="_end_of_theard"]
-[connection signal="throw_dirt" from="Player" to="." method="_on_Player_throw_dirt"]
+[connection signal="throw_dirt_shovel" from="Player" to="." method="_on_Player_throw_dirt_shovel"]
 [connection signal="timeout" from="StartupTimer" to="." method="_on_StartupTimer_timeout"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]

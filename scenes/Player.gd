@@ -2,6 +2,7 @@ class_name Player extends KinematicBody2D
 
 # warning-ignore:unused_signal
 signal throw_dirt
+signal throw_dirt_shovel(from, direction)
 
 export(float) var j_duration := .5
 export(float) var j_tiles := 5.0
@@ -111,3 +112,15 @@ func update_anim_tree() -> void:
 
 func is_realy_on_floor() -> bool:
 	return is_on_floor() or $FloorL.is_colliding() or $FloorM.is_colliding() or $FloorR.is_colliding()
+
+var initial_click: Vector2 = Vector2.ZERO
+
+func action_start(mouse: Vector2) -> void:
+	initial_click = mouse
+
+func action_end(mouse: Vector2) -> void:
+	var diff = (initial_click - mouse).length()
+	if diff < 16:
+		return
+	var direction = (mouse - $Pivot/Dirt/Throw.global_position).normalized() * 800
+	emit_signal("throw_dirt_shovel", initial_click, direction)
