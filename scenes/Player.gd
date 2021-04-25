@@ -42,9 +42,6 @@ func _process(delta):
 func pivot_left(left: bool) -> void:
 	var s: float = -1.0 if left else 1.0
 	$Pivot.scale.x = s
-	$RayStep.scale.x = s
-	$RayStep2.scale.x = s
-	$RayHead.scale.x = s
 
 func get_throw_vectors() -> Array:
 	var p = $Pivot/Dirt.global_position
@@ -60,10 +57,6 @@ func _physics_process(delta):
 	if !is_digging():
 		dir -= float(Input.is_action_pressed("move_left"))
 		dir += float(Input.is_action_pressed("move_right"))
-
-#	if dir != 0 and is_realy_on_floor() and $RayStep.is_colliding():
-#		if not ($RayHead.is_colliding() or $RayStep2.is_colliding()):
-#			velocity.y -= 200
 
 	velocity.x = dir * speed
 

@@ -33,10 +33,24 @@ func throw_block(pos: Vector2, block_type: int) -> void:
 func solidify_block(block) -> void:
 	var block_position = block.global_position
 	var cell_index = $TileMap.world_to_map(block_position)
+	var is_cell_bellow_empty = $TileMap.get_cell(cell_index.x, cell_index.y + 1) == -1
+	var is_cell_above_empty = $TileMap.get_cell(cell_index.x, cell_index.y - 1) == -1
 	if $TileMap.get_cellv(cell_index) == -1:
-		$TileMap.set_cellv(cell_index, block.type)
-		$TileMap.update_bitmask_area(cell_index)
+		if is_cell_bellow_empty:
+			set_tile(cell_index.x, cell_index.y + 1, block.type)
+		else:
+			set_tile(cell_index.x, cell_index.y, block.type)
+	else:
+		if is_cell_bellow_empty:
+			cell_index.y += 1
+			set_tile(cell_index.x, cell_index.y + 1, block.type)
+		elif is_cell_above_empty:
+			set_tile(cell_index.x, cell_index.y - 1, block.type)
 	block.queue_free()
+
+func set_tile(x: int, y: int, type: int) -> void:
+	$TileMap.set_cell(x, y, type)
+	$TileMap.update_bitmask_area(Vector2(x, y))
 
 #func update_block_selector(cell_index: Vector2, type: int = 0) -> void:
 #	var cell_pos = $TileMap.map_to_world(cell_index)
@@ -69,7 +83,9 @@ func get_next_available_block(world_position: Vector2, world_mouse: Vector2, spa
 			var x2 = x if left else -x
 			var cell = cell_index + Vector2(x2, y)
 			var cell_id = $TileMap.get_cellv(cell)
-			if cell_id != -1 and is_shovel_strong_enough(spade_type, cell_id):
+			var nothing_above = $TileMap.get_cell(cell.x, cell.y - 1) == -1
+			var pickable = is_shovel_strong_enough(spade_type, cell_id)
+			if cell_id != -1 and pickable and nothing_above:
 				return cell
 	return null
 
