@@ -95,9 +95,9 @@ func get_next_available_block(world_position: Vector2, world_mouse: Vector2, spa
 			var x2 = x if left else -x
 			var cell = cell_index + Vector2(x2, y)
 			var cell_id = $TileMap.get_cellv(cell)
-			var nothing_above = $TileMap.get_cell(cell.x, cell.y - 1) == -1
+			#var nothing_above = $TileMap.get_cell(cell.x, cell.y - 1) == -1
 			var pickable = is_shovel_strong_enough(spade_type, cell_id)
-			if cell_id != -1 and pickable and nothing_above:
+			if cell_id != -1 and pickable: # and nothing_above:
 				return cell
 	return null
 

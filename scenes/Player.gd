@@ -18,6 +18,8 @@ var jump: float = 1015.0
 var is_jump_pressed: bool = false
 var is_grounded: bool = false
 var is_walking: bool = false
+var is_wallriding: bool = false
+var is_facing_left: bool = true
 
 func _ready():
 	state_machine = anim_tree.get("parameters/playback")
@@ -67,16 +69,21 @@ func _physics_process(delta):
 	if !is_digging():
 		dir -= float(Input.is_action_pressed("move_left"))
 		dir += float(Input.is_action_pressed("move_right"))
+		is_facing_left = dir < 0
 
 	velocity.x = dir * speed
 
-	if is_realy_on_floor() and Input.is_action_just_pressed("move_jump"):
+	if (is_realy_on_floor() or is_wallriding) and Input.is_action_just_pressed("move_jump"):
 		velocity.y -= jump
 
 	velocity += gravity * delta
 
+	if is_wallriding:
+		velocity.y = min(velocity.y, 16 * 3)
+
 	velocity = move_and_slide(velocity, Vector2.UP)
 
+	is_wallriding = $Pivot/Wall.is_colliding() and velocity.y > 0
 	is_grounded = is_realy_on_floor()
 	is_walking = dir != 0.0
 	update_anim_tree()
