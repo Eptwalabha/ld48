@@ -34,10 +34,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/levels/triggers/MapTrigger.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Reference",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scenes/Player.gd"
+"path": "res://scenes/player/Player.gd"
 } ]
 _global_script_class_icons={
 "BaseTilemap": "",

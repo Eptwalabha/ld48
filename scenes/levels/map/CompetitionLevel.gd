@@ -62,7 +62,6 @@ func _on_StartupTimer_timeout():
 		countdown_label.text = "%s" % sec_start
 		startup_timer.start(1.0)
 
-
 func _on_GameTimer_timeout():
 	game_start = false
 	can_control_player = false
@@ -79,7 +78,6 @@ func _on_Player_throw_dirt_shovel(position: Vector2, direction: Vector2):
 	var radius = 2
 	var blocks = map.get_blocks(position, radius, filter_blocks)
 	var throw_position: Vector2 = player.throw_position.global_position
-#	var direction = (get_global_mouse_position() - throw_position).normalized() * 800
 	var thread = Thread.new()
 	threads.push_back(thread)
 	var blocks_type = []

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/ressources/tileset-block.tres" type="TileSet" id=1]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/LevelBase.gd" type="Script" id=3]
 [ext_resource path="res://scenes/DirtBlock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/images/tuto.png" type="Texture" id=5]
@@ -80,5 +80,4 @@ text = "time
 "
 align = 1
 
-[connection signal="throw_dirt" from="Player" to="." method="_on_Player_throw_dirt"]
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]
