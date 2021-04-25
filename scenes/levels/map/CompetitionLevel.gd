@@ -78,7 +78,6 @@ func _on_Player_throw_dirt():
 		blocks_type.push_back(map.get_cellv(block))
 		map.set_cellv(block, -1)
 		map.update_bitmask_area(block)
-
 	thread.start(self, "_spawn_blocks", [blocks_type, throw_position, direction, thread])
 
 func _spawn_blocks(args) -> void:
@@ -86,7 +85,7 @@ func _spawn_blocks(args) -> void:
 	var from: Vector2 = args[1]
 	var direction: Vector2 = args[2]
 	for type in types:
-		yield(get_tree().create_timer(0.1), "timeout")
+		yield(get_tree().create_timer(0.02), "timeout")
 		var physics_block = Block.instance()
 		var r = Vector2(randf() * 32.0 - 16.0, randf() * 32.0 - 16.0) * 10
 		map.add_block(physics_block)

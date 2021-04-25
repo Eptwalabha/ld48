@@ -25,15 +25,19 @@ func solidify_block_at(block_position: Vector2, type: int) -> void:
 			if i < limit:
 				_set_tile(cell_index.x, cell_index.y - i, type)
 
-func get_blocks(position: Vector2, _radius: int, filter: Array) -> Array:
+func get_blocks(position: Vector2, radius: int, filter: Array) -> Array:
 	var p = world_to_map(position)
-	var list = [p]
+	var list = []
 	var neighbors = [Vector2.LEFT, Vector2.UP, Vector2.DOWN, Vector2.RIGHT]
-	for neighbor in neighbors:
-		var m = get_cellv(p + neighbor)
-#		if filter.has(m):
-#			list.push_back(p + neighbor)
-		list.push_back(p + neighbor)
+	for x in range(-radius, radius + 1):
+		for y in range(-radius, radius + 1):
+			var d = Vector2(x, y)
+			if (abs(d.x) + abs(d.y)) > radius:
+				continue
+			var p2 = p + d
+			var m = get_cellv(p2)
+			if filter.has(m):
+				list.push_back(p2)
 	return list
 
 func _set_tile(x: int, y: int, type: int) -> void:
