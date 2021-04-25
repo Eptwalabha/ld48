@@ -21,6 +21,10 @@ func _process(_delta: float) -> void:
 		$Player.dig()
 
 	update_block_selector()
+	update_camera()
+
+func update_camera() -> void:
+	$Camera2D.position.y = $Player.global_position.y - 300
 
 func throw_block(block_type: int) -> void:
 	var block = Block.instance()

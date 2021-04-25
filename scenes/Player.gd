@@ -75,17 +75,18 @@ func _physics_process(delta):
 
 	if (is_realy_on_floor() or is_wallriding) and Input.is_action_just_pressed("move_jump"):
 		velocity.y -= jump
+		if is_wallriding:
+			velocity.y -= 200
+			is_wallriding = false
 
-	velocity += gravity * delta
-
-	if is_wallriding:
-		velocity.y = min(velocity.y, 16 * 3)
+	velocity += gravity * delta * (.2 if is_wallriding else 1.0)
 
 	velocity = move_and_slide(velocity, Vector2.UP)
 
-	is_wallriding = $Pivot/Wall.is_colliding() and velocity.y > 0
+	var is_falling_too_fast = velocity.y > 200
 	is_grounded = is_realy_on_floor()
 	is_walking = dir != 0.0
+	is_wallriding = $Pivot/Wall.is_colliding() and velocity.y > 0 and is_walking and !is_falling_too_fast
 	update_anim_tree()
 
 func update_anim_tree() -> void:
@@ -93,6 +94,8 @@ func update_anim_tree() -> void:
 	anim_tree["parameters/conditions/not_grounded"] = !is_grounded
 	anim_tree["parameters/conditions/moving"] = is_walking
 	anim_tree["parameters/conditions/not_moving"] = !is_walking
+	anim_tree["parameters/conditions/wallriding"] = is_wallriding
+	anim_tree["parameters/conditions/not_wallriding"] = !is_wallriding
 
 func is_realy_on_floor() -> bool:
 	return is_on_floor() or $FloorL.is_colliding() or $FloorM.is_colliding() or $FloorR.is_colliding()
