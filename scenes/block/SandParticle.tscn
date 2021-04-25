@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
 [sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 1 ), 0.0, 0.199111, 0, 0, Vector2( 1, 0.0863637 ), -2.4987, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0407523, 0, 0, Vector2( 1, 0.531818 ), -1.2093, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.611814, 1 )
-colors = PoolColorArray( 0.837198, 0.850098, 0.0730553, 1, 0.752441, 0.61821, 0.0617237, 1, 1, 1, 1, 0 )
+colors = PoolColorArray( 0.901961, 0.74902, 0.25098, 1, 0.890196, 0.87451, 0.4, 1, 1, 1, 1, 0 )
 
 [node name="SandParticle" type="CPUParticles2D"]
 amount = 25
@@ -15,6 +15,9 @@ local_coords = false
 emission_shape = 1
 emission_sphere_radius = 6.0
 gravity = Vector2( 0, 200 )
-scale_amount = 2.0
+angular_velocity_random = 1.0
+angle = 73.6
+angle_random = 1.0
+scale_amount = 4.0
 scale_amount_curve = SubResource( 1 )
 color_ramp = SubResource( 2 )

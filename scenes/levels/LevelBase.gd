@@ -35,18 +35,18 @@ func solidify_block(block) -> void:
 	var block_position = block.global_position
 	var cell_index = $TileMap.world_to_map(block_position)
 	var is_cell_bellow_empty = $TileMap.get_cell(cell_index.x, cell_index.y + 1) == -1
-	var is_cell_above_empty = $TileMap.get_cell(cell_index.x, cell_index.y - 1) == -1
-	if $TileMap.get_cellv(cell_index) == -1:
-		if is_cell_bellow_empty:
-			set_tile(cell_index.x, cell_index.y + 1, block.type)
-		else:
-			set_tile(cell_index.x, cell_index.y, block.type)
+	if is_cell_bellow_empty:
+		set_tile(cell_index.x, cell_index.y + 1, block.type)
 	else:
-		if is_cell_bellow_empty:
-			cell_index.y += 1
-			set_tile(cell_index.x, cell_index.y + 1, block.type)
-		elif is_cell_above_empty:
-			set_tile(cell_index.x, cell_index.y - 1, block.type)
+		if $TileMap.get_cellv(cell_index) == -1:
+			set_tile(cell_index.x, cell_index.y, block.type)
+		else:
+			var limit = 5
+			var i = 1
+			while $TileMap.get_cell(cell_index.x, cell_index.y - i) != -1 and i < limit:
+				i += 1
+			if i < limit:
+				set_tile(cell_index.x, cell_index.y - i, block.type)
 	block.queue_free()
 
 func set_tile(x: int, y: int, type: int) -> void:
