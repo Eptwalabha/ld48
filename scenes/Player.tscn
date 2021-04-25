@@ -119,7 +119,7 @@ tracks/3/keys = {
 "values": [ Vector2( -2.75, -21.5 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=5]
 resource_name = "jump"
 length = 0.8
 loop = true
@@ -148,7 +148,7 @@ tracks/1/keys = {
 "values": [ 27.761, 7.11502, 27.761 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=6]
 resource_name = "move"
 length = 0.8
 loop = true
@@ -177,13 +177,13 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -30 ), Vector2( 0, -31 ), Vector2( 0, -30 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "dig"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "jump"
 
 [sub_resource type="AnimationNodeAnimation" id=10]
@@ -201,28 +201,28 @@ advance_condition = "moving"
 [sub_resource type="AnimationNodeStateMachineTransition" id=14]
 advance_condition = "not_moving"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
 advance_condition = "grounded"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
 advance_condition = "not_grounded"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
 advance_condition = "not_grounded"
 
-[sub_resource type="AnimationNodeStateMachine" id=6]
-states/dig/node = SubResource( 5 )
+[sub_resource type="AnimationNodeStateMachine" id=18]
+states/dig/node = SubResource( 7 )
 states/dig/position = Vector2( 594, 81 )
-states/idle/node = SubResource( 9 )
+states/idle/node = SubResource( 8 )
 states/idle/position = Vector2( 231, 81 )
-states/jump/node = SubResource( 16 )
+states/jump/node = SubResource( 9 )
 states/jump/position = Vector2( 594, 198 )
 states/move/node = SubResource( 10 )
 states/move/position = Vector2( 231, 198 )
-transitions = [ "idle", "dig", SubResource( 11 ), "dig", "idle", SubResource( 12 ), "idle", "move", SubResource( 13 ), "move", "idle", SubResource( 14 ), "jump", "idle", SubResource( 18 ), "idle", "jump", SubResource( 19 ), "move", "jump", SubResource( 20 ) ]
+transitions = [ "idle", "dig", SubResource( 11 ), "dig", "idle", SubResource( 12 ), "idle", "move", SubResource( 13 ), "move", "idle", SubResource( 14 ), "jump", "idle", SubResource( 15 ), "idle", "jump", SubResource( 16 ), "move", "jump", SubResource( 17 ) ]
 start_node = "idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=7]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 186.54, 196.314 )
@@ -262,26 +262,33 @@ position = Vector2( 0, -16 )
 shape = SubResource( 2 )
 
 [node name="FloorL" type="RayCast2D" parent="."]
-position = Vector2( -10, 0 )
+position = Vector2( -8, 0 )
 enabled = true
-cast_to = Vector2( 0, 3 )
+cast_to = Vector2( 0, 16 )
+collision_mask = 2
+
+[node name="FloorM" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 16 )
+collision_mask = 2
 
 [node name="FloorR" type="RayCast2D" parent="."]
-position = Vector2( 10, 0 )
+position = Vector2( 8, 0 )
 enabled = true
-cast_to = Vector2( 0, 3 )
+cast_to = Vector2( 0, 16 )
+collision_mask = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/dig = SubResource( 3 )
 anims/idle = SubResource( 4 )
-anims/jump = SubResource( 15 )
-anims/move = SubResource( 8 )
+anims/jump = SubResource( 5 )
+anims/move = SubResource( 6 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 6 )
+tree_root = SubResource( 18 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 7 )
+parameters/playback = SubResource( 19 )
 parameters/conditions/grounded = false
 parameters/conditions/moving = false
 parameters/conditions/not_grounded = false

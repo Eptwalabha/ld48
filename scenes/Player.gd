@@ -35,7 +35,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("move_right"):
 		pivot_left(false)
 		$Pivot.scale.x = 1
-	
+
 	if is_jumping and Input.is_action_just_released("move_jump"):
 		is_jumping = false
 
@@ -63,7 +63,6 @@ func _physics_process(delta):
 	if is_realy_on_floor() and Input.is_action_just_pressed("move_jump"):
 		velocity.y -= jump
 
-
 	velocity += gravity * delta
 
 	velocity = move_and_slide(velocity, Vector2.UP)
@@ -75,5 +74,5 @@ func _physics_process(delta):
 	anim_tree["parameters/conditions/not_moving"] = dir == 0.0
 
 func is_realy_on_floor() -> bool:
-	return is_on_floor() or $FloorL.is_colliding() or $FloorR.is_colliding()
+	return is_on_floor() or $FloorL.is_colliding() or $FloorM.is_colliding() or $FloorR.is_colliding()
 
