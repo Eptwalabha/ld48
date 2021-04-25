@@ -5,7 +5,7 @@ var current_trigger : String = ""
 
 func _ready() -> void:
 	context_label.hide()
-	set_camera_limit(-400, 290, 20, 1300)
+	set_camera_limit(-400, 290, 20, 1500)
 	for node in get_children():
 		if node is MapTrigger:
 			node.connect("body_entered", self, "_on_MapTrigger_entered")
@@ -17,7 +17,6 @@ func _process(_delta) -> void:
 			"shop": on_shop_interact()
 			"competition": on_competition_interact()
 			_: pass
-	.update_camera($Player)
 
 func show_interact(show: bool) -> void:
 	context_label.visible = show

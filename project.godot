@@ -128,6 +128,7 @@ action={
 2d_physics/layer_2="level"
 2d_physics/layer_3="enemies"
 2d_physics/layer_4="trigger"
+2d_physics/layer_5="level-limit"
 
 [physics]
 

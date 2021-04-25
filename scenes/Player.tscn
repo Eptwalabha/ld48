@@ -176,76 +176,76 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -30 ), Vector2( 0, -31 ), Vector2( 0, -30 ) ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=7]
 resource_name = "wallriding"
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "dig"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "jump"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "move"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "wallriding"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
 advance_condition = "moving"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
 advance_condition = "not_moving"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
 advance_condition = "grounded"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
 advance_condition = "not_grounded"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
 advance_condition = "not_grounded"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
 advance_condition = "wallriding"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
 advance_condition = "not_wallriding"
 
-[sub_resource type="AnimationNodeStateMachine" id=18]
-states/dig/node = SubResource( 7 )
+[sub_resource type="AnimationNodeStateMachine" id=22]
+states/dig/node = SubResource( 8 )
 states/dig/position = Vector2( 594, 81 )
-states/idle/node = SubResource( 8 )
+states/idle/node = SubResource( 9 )
 states/idle/position = Vector2( 231, 81 )
-states/jump/node = SubResource( 9 )
+states/jump/node = SubResource( 10 )
 states/jump/position = Vector2( 594, 198 )
-states/move/node = SubResource( 10 )
+states/move/node = SubResource( 11 )
 states/move/position = Vector2( 231, 198 )
-states/wallriding/node = SubResource( 21 )
+states/wallriding/node = SubResource( 12 )
 states/wallriding/position = Vector2( 779, 141 )
-transitions = [ "idle", "dig", SubResource( 11 ), "dig", "idle", SubResource( 12 ), "idle", "move", SubResource( 13 ), "move", "idle", SubResource( 14 ), "jump", "idle", SubResource( 15 ), "idle", "jump", SubResource( 16 ), "move", "jump", SubResource( 17 ), "jump", "wallriding", SubResource( 22 ), "wallriding", "jump", SubResource( 23 ) ]
+transitions = [ "idle", "dig", SubResource( 13 ), "dig", "idle", SubResource( 14 ), "idle", "move", SubResource( 15 ), "move", "idle", SubResource( 16 ), "jump", "idle", SubResource( 17 ), "idle", "jump", SubResource( 18 ), "move", "jump", SubResource( 19 ), "jump", "wallriding", SubResource( 20 ), "wallriding", "jump", SubResource( 21 ) ]
 start_node = "idle"
 graph_offset = Vector2( 123, 51 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=19]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 
 [node name="Player" type="KinematicBody2D"]
-collision_mask = 14
+collision_mask = 30
 script = ExtResource( 1 )
 
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="icon" type="Sprite" parent="Pivot"]
-position = Vector2( 0, -28 )
+position = Vector2( 0, -30 )
 scale = Vector2( 0.42, 0.9 )
 texture = ExtResource( 2 )
 
@@ -303,13 +303,13 @@ anims/dig = SubResource( 3 )
 anims/idle = SubResource( 4 )
 anims/jump = SubResource( 5 )
 anims/move = SubResource( 6 )
-anims/wallriding = SubResource( 20 )
+anims/wallriding = SubResource( 7 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 18 )
+tree_root = SubResource( 22 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 19 )
+parameters/playback = SubResource( 23 )
 parameters/conditions/grounded = false
 parameters/conditions/moving = false
 parameters/conditions/not_grounded = false

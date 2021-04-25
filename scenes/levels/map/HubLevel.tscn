@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/levels/tilemaps/HubTilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/levels/Level.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/map/HubLevel.gd" type="Script" id=3]
 [ext_resource path="res://scenes/levels/triggers/Shop.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/levels/triggers/Competition.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20, 300 )
 
 [node name="HubLevel" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
@@ -31,3 +34,19 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Border" type="StaticBody2D" parent="." index="8"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Right" type="CollisionShape2D" parent="Border" index="0"]
+position = Vector2( 1500, 0 )
+shape = SubResource( 1 )
+
+[node name="Left" type="CollisionShape2D" parent="Border" index="1"]
+shape = SubResource( 1 )
+
+[node name="SeeBottom" type="CollisionShape2D" parent="Border" index="2"]
+position = Vector2( 1348.7, 51.9882 )
+rotation = 1.57079
+shape = SubResource( 1 )
