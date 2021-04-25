@@ -22,6 +22,10 @@ texture = SubResource( 2 )
 
 [node name="Start" type="Position2D" parent="."]
 
+[node name="TL" type="Position2D" parent="."]
+
+[node name="BR" type="Position2D" parent="."]
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -30,3 +34,5 @@ drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
 smoothing_speed = 4.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
