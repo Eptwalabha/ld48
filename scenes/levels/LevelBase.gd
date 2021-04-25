@@ -110,3 +110,35 @@ func is_shovel_strong_enough(spade_type: int, cell_id: int) -> bool:
 		GameAutoload.BLOCK_TYPE.SAND: return true
 		GameAutoload.BLOCK_TYPE.DIRT: return spade_type > 0
 		_: return spade_type > 1
+
+func pid(point: Vector2, width: int) -> int:
+	return int(point.y * width + point.x)
+
+func hole_depth(a: int, b: int, zero: int) -> int:
+	var points_id_visited = []
+	var points = []
+	for i in range(0, b - a):
+		var p = Vector2(a + i, zero)
+		if $TileMap.get_cellv(p) == -1:
+			points.append(p)
+	
+	var rect: Rect2 = $TileMap.get_used_rect()
+	var width: int = rect.size.x
+	var neighbors = [Vector2.LEFT, Vector2.UP, Vector2.DOWN, Vector2.RIGHT]
+	var lowest_yet = zero
+	while len(points):
+		var p = points.pop_back()
+		var p_id = pid(p, width)
+		points_id_visited.append(p_id)
+		if p.y > lowest_yet:
+			lowest_yet = p.y
+		for neighbor in neighbors:
+			var point_b = p + neighbor
+			if $TileMap.get_cellv(p) != -1:
+				continue
+			if !rect.has_point(point_b) || point_b.y < zero:
+				continue
+			var point_b_id = pid(point_b, width)
+			if !points_id_visited.has(point_b_id):
+				points.push_back(point_b)
+	return lowest_yet - zero
