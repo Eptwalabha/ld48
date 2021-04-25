@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -176,6 +176,9 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -30 ), Vector2( 0, -31 ), Vector2( 0, -30 ) ]
 }
 
+[sub_resource type="Animation" id=20]
+resource_name = "wallriding"
+
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "dig"
 
@@ -187,6 +190,9 @@ animation = "jump"
 
 [sub_resource type="AnimationNodeAnimation" id=10]
 animation = "move"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "wallriding"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=11]
 
@@ -209,6 +215,12 @@ advance_condition = "not_grounded"
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 advance_condition = "not_grounded"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+advance_condition = "wallriding"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+advance_condition = "not_wallriding"
+
 [sub_resource type="AnimationNodeStateMachine" id=18]
 states/dig/node = SubResource( 7 )
 states/dig/position = Vector2( 594, 81 )
@@ -218,8 +230,11 @@ states/jump/node = SubResource( 9 )
 states/jump/position = Vector2( 594, 198 )
 states/move/node = SubResource( 10 )
 states/move/position = Vector2( 231, 198 )
-transitions = [ "idle", "dig", SubResource( 11 ), "dig", "idle", SubResource( 12 ), "idle", "move", SubResource( 13 ), "move", "idle", SubResource( 14 ), "jump", "idle", SubResource( 15 ), "idle", "jump", SubResource( 16 ), "move", "jump", SubResource( 17 ) ]
+states/wallriding/node = SubResource( 21 )
+states/wallriding/position = Vector2( 779, 141 )
+transitions = [ "idle", "dig", SubResource( 11 ), "dig", "idle", SubResource( 12 ), "idle", "move", SubResource( 13 ), "move", "idle", SubResource( 14 ), "jump", "idle", SubResource( 15 ), "idle", "jump", SubResource( 16 ), "move", "jump", SubResource( 17 ), "jump", "wallriding", SubResource( 22 ), "wallriding", "jump", SubResource( 23 ) ]
 start_node = "idle"
+graph_offset = Vector2( 123, 51 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 
@@ -288,6 +303,7 @@ anims/dig = SubResource( 3 )
 anims/idle = SubResource( 4 )
 anims/jump = SubResource( 5 )
 anims/move = SubResource( 6 )
+anims/wallriding = SubResource( 20 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 18 )
@@ -298,3 +314,5 @@ parameters/conditions/grounded = false
 parameters/conditions/moving = false
 parameters/conditions/not_grounded = false
 parameters/conditions/not_moving = false
+parameters/conditions/not_wallriding = false
+parameters/conditions/wallriding = false

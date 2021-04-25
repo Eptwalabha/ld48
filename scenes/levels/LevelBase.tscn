@@ -46,6 +46,8 @@ shape = SubResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
+limit_smoothed = true
+smoothing_enabled = true
 
 [connection signal="throw_dirt" from="Player" to="." method="_on_Player_throw_dirt"]
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]
