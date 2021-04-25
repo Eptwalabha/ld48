@@ -20,12 +20,6 @@ position = Vector2( 298.575, -15.7144 )
 [node name="Start" parent="." index="4"]
 position = Vector2( 245.611, -89.4342 )
 
-[node name="TL" parent="." index="5"]
-position = Vector2( 20, -400 )
-
-[node name="BR" parent="." index="6"]
-position = Vector2( 1300, 290 )
-
 [node name="ContextLabel" type="Label" parent="CanvasLayer" index="0"]
 margin_left = 289.596
 margin_top = 20.2043
@@ -37,8 +31,3 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[connection signal="body_entered" from="Competition" to="." method="_on_Competition_entered"]
-[connection signal="body_exited" from="Competition" to="." method="_on_Competition_exited"]
-[connection signal="body_entered" from="Shop" to="." method="_on_Shop_entered"]
-[connection signal="body_exited" from="Shop" to="." method="_on_Shop_exited"]

@@ -22,10 +22,6 @@ texture = SubResource( 2 )
 
 [node name="Start" type="Position2D" parent="."]
 
-[node name="TL" type="Position2D" parent="."]
-
-[node name="BR" type="Position2D" parent="."]
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
