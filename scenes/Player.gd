@@ -13,7 +13,10 @@ var gravity : Vector2 = Vector2(0, 4062);
 var velocity: Vector2 = Vector2.ZERO
 const speed: float = 16.0 * 20.0
 var jump: float = 1015.0
-var is_jumping: bool = false
+
+var is_jump_pressed: bool = false
+var is_grounded: bool = false
+var is_walking: bool = false
 
 func _ready():
 	state_machine = anim_tree.get("parameters/playback")
@@ -28,6 +31,12 @@ func dig() -> void:
 		return
 	state_machine.travel("dig")
 
+func is_moving() -> bool:
+	return is_walking or !is_grounded
+
+func get_tool() -> int:
+	return 0
+
 func _process(delta):
 	if Input.is_action_just_pressed("move_left"):
 		pivot_left(true)
@@ -36,8 +45,8 @@ func _process(delta):
 		pivot_left(false)
 		$Pivot.scale.x = 1
 
-	if is_jumping and Input.is_action_just_released("move_jump"):
-		is_jumping = false
+	if is_jump_pressed and Input.is_action_just_released("move_jump"):
+		is_jump_pressed = false
 
 func pivot_left(left: bool) -> void:
 	var s: float = -1.0 if left else 1.0
@@ -67,12 +76,15 @@ func _physics_process(delta):
 
 	velocity = move_and_slide(velocity, Vector2.UP)
 
-	var grounded = is_realy_on_floor()
-	anim_tree["parameters/conditions/grounded"] = grounded
-	anim_tree["parameters/conditions/not_grounded"] = !grounded
-	anim_tree["parameters/conditions/moving"] = dir != 0.0
-	anim_tree["parameters/conditions/not_moving"] = dir == 0.0
+	is_grounded = is_realy_on_floor()
+	is_walking = dir != 0.0
+	update_anim_tree()
+
+func update_anim_tree() -> void:
+	anim_tree["parameters/conditions/grounded"] = is_grounded
+	anim_tree["parameters/conditions/not_grounded"] = !is_grounded
+	anim_tree["parameters/conditions/moving"] = is_walking
+	anim_tree["parameters/conditions/not_moving"] = !is_walking
 
 func is_realy_on_floor() -> bool:
 	return is_on_floor() or $FloorL.is_colliding() or $FloorM.is_colliding() or $FloorR.is_colliding()
-

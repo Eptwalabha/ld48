@@ -9,7 +9,6 @@ func _ready():
 func start_level() -> void:
 	$Player.global_position = $Start.global_position
 
-
 func _on_End_body_entered(body):
 	if body == $Player:
 		start_level()
@@ -20,6 +19,8 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_pressed("action"):
 		$Player.dig()
+
+	update_block_selector()
 
 func throw_block(pos: Vector2, block_type: int) -> void:
 	var block = Block.instance()
@@ -52,9 +53,20 @@ func set_tile(x: int, y: int, type: int) -> void:
 	$TileMap.set_cell(x, y, type)
 	$TileMap.update_bitmask_area(Vector2(x, y))
 
-#func update_block_selector(cell_index: Vector2, type: int = 0) -> void:
-#	var cell_pos = $TileMap.map_to_world(cell_index)
-#	cursor.update_cursor($TileMap.to_global(cell_pos), type)
+func update_block_selector() -> void:
+	if $Player.is_moving():
+		cursor.update_cursor(Vector2.ZERO, 0)
+		return
+
+	var p_position = $Player.global_position + Vector2(0.0, 8.0)
+	var p_tool = $Player.get_tool()
+	match get_next_available_block(p_position, get_global_mouse_position(), p_tool):
+		null:
+			cursor.update_cursor(Vector2.ZERO, 0)
+		var cell_index:
+			var cell_position = $TileMap.map_to_world(cell_index)
+			cursor.update_cursor($TileMap.to_global(cell_position) + Vector2(8.0, 8.0), 1)
+			cursor.cell_index = cell_index
 
 func _on_block_hit_something(body: Node, block) -> void:
 	solidify_block(block)
@@ -65,7 +77,8 @@ func _on_block_sleep(block) -> void:
 
 func _on_Player_throw_dirt():
 	var p_position = $Player.global_position + Vector2(0.0, 8.0)
-	match get_next_available_block(p_position, get_global_mouse_position(), 0):
+	var p_tool = $Player.get_tool()
+	match get_next_available_block(p_position, get_global_mouse_position(), p_tool):
 		null: return
 		var cell_index:
 			var cell_id = $TileMap.get_cellv(cell_index)

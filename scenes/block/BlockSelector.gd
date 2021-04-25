@@ -9,7 +9,8 @@ enum TYPE {
 	INVALID
 }
 
-func update_cursor(position: Vector2, new_type: int) -> void:
+func update_cursor(cell_position: Vector2, new_type: int) -> void:
+	global_position = cell_position
 	type = new_type
 	match type:
 		TYPE.VALID:
