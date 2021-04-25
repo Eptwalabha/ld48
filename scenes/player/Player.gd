@@ -8,10 +8,10 @@ export(float) var j_duration := .5
 export(float) var j_tiles := 5.0
 export(int) var max_range := 3
 
-var shovel: Shovel = null
 
 var ShovelScene = preload("res://scenes/player/tools/Shovel.tscn")
 
+var shovel: Shovel = null
 onready var anim_tree : AnimationTree = $AnimationTree
 onready var throw_position: Position2D = $Pivot/Dirt
 var state_machine: AnimationNodeStateMachinePlayback
@@ -30,6 +30,9 @@ var action_jump: bool = false
 var action_move_left: bool = false
 var action_move_right: bool = false
 
+var current_tool: PlayerTool = null
+
+
 func _ready():
 	initialize_tools()
 	state_machine = anim_tree.get("parameters/playback")
@@ -43,6 +46,8 @@ func initialize_tools() -> void:
 	if GameAutoload.is_shovel_unlocked:
 		shovel = ShovelScene.instance()
 		shovel.initialize(GameAutoload.player_tools["shovel"])
+		shovel.connect("throw", self, "_on_Shovel_throw")
+		current_tool = shovel
 
 func dig() -> void:
 	if is_digging():
@@ -123,16 +128,14 @@ func update_anim_tree() -> void:
 func is_realy_on_floor() -> bool:
 	return is_on_floor() or $FloorL.is_colliding() or $FloorM.is_colliding() or $FloorR.is_colliding()
 
-var initial_click: Vector2 = Vector2.ZERO
-
 func action_start(mouse: Vector2) -> void:
-	if shovel is Shovel:
-		initial_click = mouse
+	if current_tool != null:
+		current_tool.action_start(mouse)
 
 func action_end(mouse: Vector2) -> void:
-	if shovel is Shovel:
-		var diff = (initial_click - mouse).length()
-		if diff < 16:
-			return
-		var direction = (mouse - $Pivot/Dirt/Throw.global_position).normalized() * 800
-		emit_signal("throw_dirt_shovel", initial_click, direction, shovel)
+	if current_tool != null:
+		current_tool.action_end(mouse)
+
+func _on_Shovel_throw(from: Vector2, to: Vector2, force: int) -> void:
+	var direction = (to - $Pivot/Dirt/Throw.global_position).normalized() * force
+	emit_signal("throw_dirt_shovel", from, direction, shovel)
