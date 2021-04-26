@@ -28,6 +28,7 @@ func reset_level() -> void:
 	generate_contestants_results()
 	line.visible = false
 	tool_ui.visible = false
+	tool_ui.set_button(player.has_shovel, player.has_bucket, player.has_explosive)
 	game_start = false
 	set_player_control(false)
 	player.global_position = start.global_position

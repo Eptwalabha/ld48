@@ -41,6 +41,10 @@ var action_jump: bool = false
 var action_move_left: bool = false
 var action_move_right: bool = false
 
+var has_shovel = false
+var has_bucket = false
+var has_explosive = false
+
 var current_tool: PlayerTool = null
 var available_tools: Array = []
 
@@ -61,6 +65,7 @@ func initialize_tools() -> void:
 		add_child(shovel)
 		available_tools.push_back(GameAutoload.TOOL_TYPE.SHOVEL)
 		current_tool = shovel
+		has_shovel = true
 	if GameAutoload.unlocked["bucket"]:
 		bucket = BucketScene.instance()
 		bucket.initialize(GameAutoload.player_tools["bucket"])
@@ -69,6 +74,7 @@ func initialize_tools() -> void:
 		add_child(bucket)
 		available_tools.push_back(GameAutoload.TOOL_TYPE.BUCKET)
 		current_tool = bucket
+		has_bucket = true
 	if GameAutoload.unlocked["explosive"]:
 		explosive = ExplosiveScene.instance()
 		explosive.initialize(GameAutoload.player_tools["explosive"])
@@ -76,6 +82,7 @@ func initialize_tools() -> void:
 		add_child(explosive)
 		available_tools.push_back(GameAutoload.TOOL_TYPE.EXPLOSIVE)
 		current_tool = explosive
+		has_explosive = true
 
 func set_control(control: bool) -> void:
 	can_move = control

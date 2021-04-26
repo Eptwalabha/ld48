@@ -11,6 +11,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Control" type="Control" parent="."]
+margin_left = 40.0
+margin_top = 49.0
+margin_right = 371.0
+margin_bottom = 107.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Money" type="Label" parent="Control/HBoxContainer"]
+margin_top = 8.0
+margin_bottom = 32.0
+
 [node name="Dialog" type="Control" parent="."]
 margin_left = 40.0
 margin_top = 122.0

@@ -30,7 +30,7 @@ shop_item_name_explosive_2	A big bag of grenades
 shop_item_description_explosive_0	I should not sell that to kids…
 shop_item_description_explosive_1	Because one explosion is never enough
 shop_item_description_explosive_2	Ha ha… grenade goes brrr
-not_enough_money	Sorry, kid. I can’t give credit.\nCome back when you’re a little, mmm… richer!
+not_enough_money	Sorry, kid. I can’t give credit.\nCome back when you’re a little,\nmmm… richer!
 thank_you	Thanks for the capsules!\nCome back anytime soon
 contest_menu_title	Today’s contests
 contest_menu_enter_btn	Enter this contest
@@ -51,3 +51,4 @@ warning	Warning
 quit_the_game	You’re about to quit the game.\nAre you sure?
 quit	Yes, quit
 cancel	Cancel
+your_money	You have %s capsules

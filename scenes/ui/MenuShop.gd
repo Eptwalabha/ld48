@@ -53,6 +53,7 @@ func update_selection(btn):
 	selection.global_position = btn.rect_global_position + size / 2
 
 func update_btn_visiblity():
+	$Control/HBoxContainer/Money.text = tr("your_money") % GameAutoload.player_money
 	shovels_line.visible = true
 	buckets_line.visible = GameAutoload.unlocked["shovel"]
 	explosives_line.visible = GameAutoload.unlocked["explosive"]
