@@ -6,6 +6,7 @@ signal throw_dirt_shovel(from, direction, shovel)
 signal fill_bucket(position, bucket)
 signal empty_bucket(position, blocks, bucket)
 signal spawn_explosive(position, direction, explosive)
+signal change_tool(tool_type)
 
 export(float) var j_duration := .5
 export(float) var j_tiles := 5.0
@@ -41,7 +42,7 @@ var action_move_left: bool = false
 var action_move_right: bool = false
 
 var current_tool: PlayerTool = null
-
+var available_tools: Array = []
 
 func _ready():
 	initialize_tools()
@@ -58,6 +59,7 @@ func initialize_tools() -> void:
 		shovel.initialize(GameAutoload.player_tools["shovel"])
 		shovel.connect("throw", self, "_on_Shovel_throw")
 		add_child(shovel)
+		available_tools.push_back(GameAutoload.TOOL_TYPE.SHOVEL)
 		current_tool = shovel
 	if GameAutoload.unlocked["bucket"]:
 		bucket = BucketScene.instance()
@@ -65,12 +67,14 @@ func initialize_tools() -> void:
 		bucket.connect("fill", self, "_on_Bucket_fill")
 		bucket.connect("empty", self, "_on_Bucket_empty")
 		add_child(bucket)
+		available_tools.push_back(GameAutoload.TOOL_TYPE.BUCKET)
 		current_tool = bucket
 	if GameAutoload.unlocked["explosive"]:
 		explosive = ExplosiveScene.instance()
 		explosive.initialize(GameAutoload.player_tools["explosive"])
 		explosive.connect("spawn", self, "_on_Explosive_spawn")
 		add_child(explosive)
+		available_tools.push_back(GameAutoload.TOOL_TYPE.EXPLOSIVE)
 		current_tool = explosive
 
 func set_control(control: bool) -> void:
@@ -193,3 +197,33 @@ func _on_Bucket_empty(position: Vector2, blocks: Array) -> void:
 func _on_Explosive_spawn(from: Vector2, to: Vector2, force: int) -> void:
 	var direction = (to - from).normalized() * force
 	emit_signal("spawn_explosive", from, direction, explosive)
+
+func current_tool_index() -> int:
+	for i in range(len(available_tools)):
+		if available_tools[i] == current_tool.type:
+			return i
+	return -1
+
+func next_tool() -> void:
+	if len(available_tools) == 0:
+		return
+	var i = wrapi(current_tool_index() + 1, 0, len(available_tools))
+	change_tool(available_tools[i])
+
+func previous_tool() -> void:
+	if len(available_tools) == 0:
+		return
+	var i = wrapi(current_tool_index() - 1, 0, len(available_tools))
+	change_tool(available_tools[i])
+
+func change_tool(next_tool_type: int) -> void:
+	if next_tool_type == current_tool.type:
+		return
+	match next_tool_type:
+		GameAutoload.TOOL_TYPE.SHOVEL:
+			current_tool = shovel
+		GameAutoload.TOOL_TYPE.BUCKET:
+			current_tool = bucket
+		GameAutoload.TOOL_TYPE.EXPLOSIVE:
+			current_tool = explosive
+	emit_signal("change_tool", next_tool_type)

@@ -8,6 +8,7 @@ var nbr_grenades: int = 0
 
 func initialize(the_amount: int) -> void:
 	.initialize(GameAutoload.TOOL_QUALITY.SUPER)
+	type = GameAutoload.TOOL_TYPE.EXPLOSIVE
 	amount = the_amount
 	radius = 0.0
 	has_cursor = false

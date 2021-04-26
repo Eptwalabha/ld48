@@ -8,6 +8,7 @@ var BlockScene = preload("res://scenes/DirtBlock.tscn")
 onready var countdown_label: Label = $CanvasLayer/CountdownStart
 onready var game_timer_label: Label = $CanvasLayer/Countdown
 onready var map: BaseTilemap = $Tilemap
+onready var tool_ui: UITool = $CanvasLayer/UITool
 
 onready var startup_timer: Timer = $StartupTimer
 onready var game_timer: Timer = $GameTimer
@@ -37,6 +38,7 @@ func start() -> void:
 		startup_timer.start(1.0)
 
 func start_contest() -> void:
+	tool_ui.set_current(player.current_tool.type)
 	game_start = true
 	set_player_control(true)
 	game_timer.start()
@@ -51,6 +53,11 @@ func _process(_delta: float) -> void:
 		player.action_start(get_global_mouse_position(), cursor_last_cell_index)
 	if Input.is_action_just_released("action"):
 		player.action_end(get_global_mouse_position(), cursor_last_cell_index)
+	
+	if Input.is_action_just_released("action_next_tool"):
+		player.next_tool()
+	if Input.is_action_just_released("action_previous_tool"):
+		player.previous_tool()
 	
 	if player.has_tool_cursor():
 		update_player_reach()
@@ -120,6 +127,7 @@ func _on_Player_throw_dirt_shovel(cell: Vector2, direction: Vector2, shovel: Sho
 
 func _on_Player_empty_bucket(position: Vector2, blocks: Array, bucket: Bucket):
 	bucket.empty()
+	tool_ui.set_bucket_fullness(false)
 	var x = 300 if position.x > player.global_position.x else -300
 	var blocks_to_spawn = []
 	for block_type in blocks:
@@ -148,6 +156,8 @@ func _on_Player_fill_bucket(cell: Vector2, capacity_left: int, bucket: Bucket):
 		bucket.add_block(map.get_cellv(block))
 		map.set_cellv(block, -1)
 		map.update_bitmask_area(block)
+	if bucket.is_full():
+		tool_ui.set_bucket_fullness(true)
 
 func _on_Player_spawn_explosive(_position, direction, explosive):
 	var grenade = GrenadeScene.instance()
@@ -179,3 +189,9 @@ func _on_Grenade_blowup(position, _force, radius: float, grenade: Grenade, explo
 		return
 	var thread = Thread.new()
 	thread.start(self, "_spawn_blocks", [blocks_to_spawn, thread])
+
+func _on_Player_change_tool(tool_type):
+	tool_ui.set_current(tool_type)
+
+func _on_UITool_tool_clicked(tool_type):
+	player.change_tool(tool_type)

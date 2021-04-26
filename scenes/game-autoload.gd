@@ -10,7 +10,7 @@ enum BLOCK_TYPE {
 }
 
 enum TOOL_TYPE {
-	SPADE,
+	SHOVEL,
 	BUCKET,
 	EXPLOSIVE
 }
@@ -30,9 +30,9 @@ func buy_item(type, quality) -> void:
 	player_tools[type] = quality
 
 var unlocked = {
-	"shovel": false,
-	"bucket": false,
-	"explosive": false,
+	"shovel": false or DEBUG,
+	"bucket": false or DEBUG,
+	"explosive": false or DEBUG,
 }
 
 var player_money = 10
@@ -103,7 +103,7 @@ var contests = [
 	{ "duration": 1.0,	"price": [800, 400, 200],	"results": [10, 20],	"podium": -1,	"best": 0 },
 ]
 
-var current_contest = null
+var current_contest = null if DEBUG else contests[0]
 
 func can_contest(id: int) -> bool:
 	return unlocked["shovel"]

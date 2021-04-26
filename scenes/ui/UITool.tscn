@@ -1,0 +1,118 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/images/menu.png" type="Texture" id=1]
+[ext_resource path="res://scenes/ui/UITool.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 37, 65, 72, 109 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 367, -3, 81, 99 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 270, 9, 62, 76 )
+
+[node name="UITool" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -138.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1004.0
+margin_bottom = 118.0
+size_flags_horizontal = 5
+custom_constants/separation = 64
+alignment = 1
+
+[node name="Shovel" type="Button" parent="MarginContainer/HBoxContainer"]
+margin_left = 281.0
+margin_right = 379.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 98, 98 )
+flat = true
+
+[node name="Logo" type="TextureRect" parent="MarginContainer/HBoxContainer/Shovel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -36.0
+margin_top = -55.5
+margin_right = 36.0
+margin_bottom = 55.5
+texture = SubResource( 1 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bucket" type="Button" parent="MarginContainer/HBoxContainer"]
+margin_left = 443.0
+margin_right = 541.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 98, 98 )
+size_flags_horizontal = 5
+size_flags_vertical = 5
+flat = true
+
+[node name="Logo" type="TextureRect" parent="MarginContainer/HBoxContainer/Bucket"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -49.0
+margin_top = -55.5
+margin_right = 49.0
+margin_bottom = 55.5
+texture = SubResource( 2 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Explosive" type="Button" parent="MarginContainer/HBoxContainer"]
+margin_left = 605.0
+margin_right = 703.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 98, 98 )
+flat = true
+
+[node name="Logo" type="TextureRect" parent="MarginContainer/HBoxContainer/Explosive"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -35.5
+margin_top = -55.5
+margin_right = 35.5
+margin_bottom = 55.5
+texture = SubResource( 3 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Shovel" to="." method="_on_Shovel_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Bucket" to="." method="_on_Bucket_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Explosive" to="." method="_on_Explosive_pressed"]

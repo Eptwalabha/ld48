@@ -12,8 +12,12 @@ var capacity: int = 10
 
 func initialize(quality: int) -> void:
 	.initialize(quality)
+	type = GameAutoload.TOOL_TYPE.BUCKET
 	radius = _block_radius(quality)
 	capacity = _block_capacity(quality)
+
+func is_full() -> bool:
+	return len(blocks) >= capacity
 
 func empty() -> void:
 	blocks = []

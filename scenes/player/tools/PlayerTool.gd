@@ -3,6 +3,7 @@ class_name PlayerTool extends Node2D
 var QUALITY = GameAutoload.TOOL_QUALITY
 var BLOCK = GameAutoload.BLOCK_TYPE
 
+var type: int
 var filter: Array = []
 var radius: float = 0.0
 var is_tool_currently_used: bool = false

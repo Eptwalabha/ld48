@@ -9,6 +9,7 @@ var start_cell: Vector2 = Vector2.ZERO
 
 func initialize(quality: int) -> void:
 	.initialize(quality)
+	type = GameAutoload.TOOL_TYPE.SHOVEL
 	radius = _block_radius(quality)
 
 func _block_radius(quality: int) -> float:
