@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func reset_level() -> void:
 	game_start = false
-	can_control_player = false
+	set_player_control(false)
 	player.global_position = start.global_position
 	sec_start = 4
 	startup_timer.stop()
@@ -38,7 +38,7 @@ func start() -> void:
 
 func start_competition() -> void:
 	game_start = true
-	can_control_player = true
+	set_player_control(true)
 	game_timer.start()
 	game_timer_label.show()
 
@@ -97,7 +97,7 @@ func _on_StartupTimer_timeout():
 
 func _on_GameTimer_timeout():
 	game_start = false
-	can_control_player = false
+	set_player_control(false)
 
 func _on_Player_throw_dirt_shovel(cell: Vector2, direction: Vector2, shovel: Shovel):
 	player.dig()

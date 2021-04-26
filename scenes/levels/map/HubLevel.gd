@@ -41,18 +41,25 @@ func _on_MapTrigger_exited(_trigger: MapTrigger, _body):
 func on_shop_interact() -> void:
 	show_interact(false)
 	current_state = HUB_STATE.MENU
-	can_control_player = false
+	set_player_control(false)
 	camera_target = $Shop/CameraFocus
 	$CanvasLayer/MenuShop.open()
 
 func on_competition_interact() -> void:
 	show_interact(false)
 	current_state = HUB_STATE.MENU
-	can_control_player = false
+	set_player_control(false)
 	camera_target = $Competition/CameraFocus
+	$CanvasLayer/MenuCompetition.open()
 
 func _on_MenuShop_close_menu():
 	show_interact(true)
 	current_state = HUB_STATE.PLAYING
-	can_control_player = true
+	set_player_control(true)
+	camera_target = $Player
+
+func _on_MenuCompetition_close_menu():
+	show_interact(true)
+	current_state = HUB_STATE.PLAYING
+	set_player_control(true)
 	camera_target = $Player

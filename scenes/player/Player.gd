@@ -29,6 +29,8 @@ var velocity: Vector2 = Vector2.ZERO
 const speed: float = 16.0 * 20.0
 var jump: float = 1015.0
 
+var can_move: bool = true setget set_control
+
 var is_grounded: bool = false
 var is_walking: bool = false
 var is_wallriding: bool = false
@@ -71,6 +73,12 @@ func initialize_tools() -> void:
 		add_child(explosive)
 		current_tool = explosive
 
+func set_control(control: bool) -> void:
+	can_move = control
+	if !can_move:
+		action_move_left = 0
+		action_move_right = 0
+
 func has_tool_cursor() -> bool:
 	return current_tool != null and current_tool.has_cursor
 
@@ -97,7 +105,7 @@ func get_map_reach_collider_point() -> Vector2:
 func is_map_reach_colliding() -> bool:
 	return $MapReach.is_colliding()
 
-func process(_delat: float) -> void:
+func process(_delta: float) -> void:
 	if Input.is_action_just_pressed("move_left"):
 		pivot_left(true)
 		$Pivot.scale.x = -1

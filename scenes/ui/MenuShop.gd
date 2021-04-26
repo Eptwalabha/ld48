@@ -1,6 +1,4 @@
-class_name MenuShop extends Control
-
-signal close_menu()
+class_name MenuShop extends UIMenu
 
 onready var dialog = $Dialog
 onready var dialog_item = $Dialog/Item
@@ -114,6 +112,10 @@ func _on_btn_hover(item_type: String, item_quality: int) -> void:
 
 func item_price(type, quality) -> int:
 	return GameAutoload.item_price(type, quality)
+
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		_on_Close_pressed()
 
 func _on_btn_pressed(btn, item_type: String, item_quality: int) -> void:
 	if current_selection == null:
