@@ -71,6 +71,9 @@ func initialize_tools() -> void:
 		add_child(explosive)
 		current_tool = explosive
 
+func has_tool_cursor() -> bool:
+	return current_tool != null and current_tool.has_cursor
+
 func dig() -> void:
 	if is_digging():
 		return

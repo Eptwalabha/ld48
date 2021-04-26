@@ -9,6 +9,7 @@ func initialize(the_amount: int) -> void:
 	.initialize(GameAutoload.TOOL_QUALITY.SUPER)
 	amount = the_amount
 	radius = 0.0
+	has_cursor = false
 
 func action_start(position: Vector2, _cell) -> void:
 	if amount > 0:

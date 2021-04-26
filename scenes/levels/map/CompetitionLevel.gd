@@ -49,7 +49,9 @@ func _process(_delta: float) -> void:
 		player.action_start(get_global_mouse_position(), cursor_last_cell_index)
 	if Input.is_action_just_released("action"):
 		player.action_end(get_global_mouse_position(), cursor_last_cell_index)
-	update_player_reach()
+	
+	if player.has_tool_cursor():
+		update_player_reach()
 
 func update_player_reach() -> void:
 	if player.is_map_reach_colliding():
@@ -155,7 +157,8 @@ func _on_Player_spawn_explosive(position, direction, explosive):
 	grenade.connect("blow_up", self, "_on_Grenade_blowup", [grenade])
 
 func _on_Grenade_blowup(position, force, radius, grenade: Grenade) -> void:
-	var blocks = map.get_blocks(position, radius, grenade.filter)
+	var cell_index = map.world_to_map(position)
+	var blocks = map.get_blocks(cell_index, radius, grenade.filter)
 	var blocks_to_spawn = []
 	for block in blocks:
 		var r = randf()
