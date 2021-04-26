@@ -10,6 +10,6 @@ func start_moving():
 	$Label.visible = true
 	moving = true
 
-func _process(delta):
+func _process(_delta):
 	if moving:
 		$Label.text = "%s" % int(global_position.y / 16)

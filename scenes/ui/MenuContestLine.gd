@@ -11,7 +11,7 @@ func initialize(nbr: int, the_data: Dictionary) -> void:
 	data = the_data
 	$MarginContainer/VBoxContainer/ID.text = str(id)
 	$MarginContainer/VBoxContainer/Name.text = tr("contest_name_%s" % id)
-	$MarginContainer/VBoxContainer/Result.text = "-" if data["podium"] == -1 else "#" + str(data["podium"])
+	$MarginContainer/VBoxContainer/Result.text = "-" if data["podium"] == -1 else "#" + str(data["podium"] + 1)
 	selection(false)
 
 func selection(selected: bool) -> void:

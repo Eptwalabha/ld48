@@ -1,6 +1,8 @@
 class_name Level extends Node2D
 
+# warning-ignore:unused_signal
 signal fadein_end
+# warning-ignore:unused_signal
 signal fadeout_end
 
 export(bool) var can_use_tools = false

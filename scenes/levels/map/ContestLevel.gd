@@ -87,15 +87,13 @@ func _spawn_blocks(args) -> void:
 		var physics_block = BlockScene.instance()
 		map.add_block(physics_block)
 		var type = block["type"] if game_start else -1
-		physics_block.initialize(block["position"], block["velocity"], block["type"])
+		physics_block.initialize(block["position"], block["velocity"], type)
 	emit_signal("end_of_theard", args[1])
 
 func _end_of_theard(thread: Thread):
 	thread.wait_to_finish()
 
 func _on_GameTimer_timeout():
-	game_start = false
-	set_player_control(false)
 	end_level()
 
 func _on_Player_throw_dirt_shovel(cell: Vector2, direction: Vector2, shovel: Shovel):
@@ -105,8 +103,9 @@ func _on_Player_throw_dirt_shovel(cell: Vector2, direction: Vector2, shovel: Sho
 	var blocks_to_spawn = []
 	for block in blocks:
 		var r = Vector2(randf() * 32.0 - 16.0, randf() * 32.0 - 16.0) * 5
+		var type = -1 if randf() > .7 else map.get_cellv(block)
 		blocks_to_spawn.append({
-			"type": map.get_cellv(block),
+			"type": type,
 			"position": player.throw_position.global_position,
 			"velocity": direction + r,
 		})
@@ -194,6 +193,8 @@ func _on_GameOverlay_end_of_count_down():
 var final_depth: int = 0
 
 func end_level() -> void:
+	game_start = false
+	set_player_control(false)
 	player.hide()
 	tool_ui.hide()
 	map.end_of_level = true
@@ -201,14 +202,19 @@ func end_level() -> void:
 	final_depth = map.hole_depth(0, int(r.size.x - 1), 0)
 	line.start_moving()
 	camera_target = line
-	yield(get_tree().create_timer(1.0), "timeout")
+	$Pause.start(1.0)
+	yield($Pause, "timeout")
 	var line_tween: Tween = $Line/Tween
 	var position_end_at = Vector2(line.global_position.x, final_depth * 16)
 	display_line_depth = true
 	line_tween.interpolate_property(line, "global_position", line.global_position, position_end_at, 3.0, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	line_tween.start()
 	yield(line_tween, "tween_all_completed")
-	yield(get_tree().create_timer(2.0), "timeout")
+	$Pause.start(2.0)
+	yield($Pause, "timeout")
 	fade(false)
-	yield(self, "fadeout_end")
-	get_tree().change_scene("res://scenes/levels/map/HubLevel.tscn")
+
+func _on_CompetitionLevel_fadeout_end():
+	if !game_start:
+		var _osef = get_tree().change_scene("res://scenes/levels/map/HubLevel.tscn")
+		GameAutoload.save_result(final_depth, 0)

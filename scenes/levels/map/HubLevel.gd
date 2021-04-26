@@ -71,4 +71,4 @@ func _on_MenuContest_enter_contest(id):
 		GameAutoload.set_current_contest(id)
 		fade(false)
 		yield(self, "fadeout_end")
-		get_tree().change_scene("res://scenes/levels/map/ContestLevel.tscn")
+		var _osef = get_tree().change_scene("res://scenes/levels/map/ContestLevel.tscn")

@@ -75,6 +75,10 @@ position = Vector2( 635.718, 0.000396729 )
 
 [node name="Tween" type="Tween" parent="Line" index="1"]
 
+[node name="Pause" type="Timer" parent="." index="9"]
+one_shot = true
+
+[connection signal="fadeout_end" from="." to="." method="_on_CompetitionLevel_fadeout_end"]
 [connection signal="change_tool" from="Player" to="." method="_on_Player_change_tool"]
 [connection signal="empty_bucket" from="Player" to="." method="_on_Player_empty_bucket"]
 [connection signal="fill_bucket" from="Player" to="." method="_on_Player_fill_bucket"]

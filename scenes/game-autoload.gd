@@ -97,16 +97,28 @@ var shop = {
 
 
 var contests = [
-	{ "duration": 0.1,	"price": [200, 100, 50],	"results": [4, 10],		"podium": -1,	"best": 0 },
-	{ "duration": 2.0,	"price": [500, 200, 100],	"results": [6, 15],		"podium": -1,	"best": 0 },
+	{ "duration": 0.1,	"price": [200, 100, 50],	"results": [4, 8],		"podium": -1,	"best": 0 },
+	{ "duration": 2.0,	"price": [500, 200, 100],	"results": [6, 10],		"podium": -1,	"best": 0 },
 	{ "duration": 2.0,	"price": [500, 200, 100],	"results": [10, 20],	"podium": -1,	"best": 0 },
 	{ "duration": 1.0,	"price": [800, 400, 200],	"results": [10, 20],	"podium": -1,	"best": 0 },
 ]
 
 var current_contest = null if !DEBUG else contests[0]
+var current_id = -1 if !DEBUG else 0
 
-func can_contest(id: int) -> bool:
+func can_contest(_id: int) -> bool:
 	return unlocked["shovel"]
 
 func set_current_contest(id: int) -> void:
 	current_contest = contests[id]
+	current_id = id
+
+func save_result(depth: int, podium: int) -> void:
+	if podium < 3:
+		var old_podium = contests[current_id]["podium"]
+		if old_podium == -1:
+			contests[current_id]["podium"] = podium
+		else:
+			contests[current_id]["podium"] = min(podium, old_podium)
+	contests[current_id]["best"] = max(depth, contests[current_id]["best"])
+	print(contests[current_id])
