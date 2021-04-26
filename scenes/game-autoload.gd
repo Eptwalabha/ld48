@@ -22,13 +22,13 @@ enum TOOL_QUALITY {
 	SUPER,
 }
 
-var is_shovel_unlocked = false
+var is_shovel_unlocked = true
 var is_bucket_unlocked = false
-var is_explosive_unlocked = true
+var is_explosive_unlocked = false
 
 var player_money = 0
 var player_tools = {
-	"shovel": TOOL_QUALITY.BASIC,
+	"shovel": TOOL_QUALITY.NICE,
 	"bucket": TOOL_QUALITY.BASIC,
 	"explosive": 20
 }
