@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/levels/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/levels/tilemaps/Contest_01.tscn" type="PackedScene" id=2]
@@ -6,14 +6,15 @@
 [ext_resource path="res://scenes/ui/UITool.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/ui/GameOverlay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/ui/Line.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/fonts/font_huge_letter.tres" type="DynamicFont" id=7]
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.472656, 0.375939, 0.0553894, 1, 0.167969, 0.122409, 0.0354309, 1 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 20, 2000 )
 
 [node name="CompetitionLevel" instance=ExtResource( 1 )]
@@ -23,7 +24,7 @@ script = ExtResource( 3 )
 position = Vector2( -132, 1040 )
 rotation = 1.57079
 scale = Vector2( 1, 1743.66 )
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 
 [node name="Tilemap" parent="." index="2" instance=ExtResource( 2 )]
 
@@ -33,11 +34,11 @@ collision_mask = 0
 
 [node name="Left" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2( 0, 1500 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Right" type="CollisionShape2D" parent="StaticBody2D" index="1"]
 position = Vector2( 1280, 1500 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Start" parent="." index="4"]
 position = Vector2( 635.264, -33.4543 )
@@ -46,10 +47,15 @@ position = Vector2( 635.264, -33.4543 )
 position = Vector2( 635.718, -60.5446 )
 
 [node name="Countdown" type="Label" parent="CanvasLayer" index="1"]
-margin_left = 365.587
-margin_top = 14.9831
-margin_right = 558.587
-margin_bottom = 106.983
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -96.5
+margin_top = 0.000396729
+margin_right = 96.5
+margin_bottom = 92.0003
+custom_fonts/font = ExtResource( 7 )
+text = "10.0"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

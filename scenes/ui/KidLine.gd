@@ -8,4 +8,4 @@ func initialize(id: int, the_depth: int) -> void:
 	depth = the_depth
 	global_position.y = depth * 16 + 8
 	position.x = 100 * id
-	$Label.text = kid_name + "(%s)" % depth
+	$Label.text = kid_name

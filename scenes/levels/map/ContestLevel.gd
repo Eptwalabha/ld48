@@ -54,7 +54,7 @@ func generate_contestants_results() -> void:
 	var results = GameAutoload.current_contest["results"]
 	var min_r = results[0]
 	var diff = results[1] - min_r
-	for i in range(0, 5):
+	for i in range(0, 4):
 		var depth = randi() % diff + min_r
 		var kid_name = "kid %s" % i
 		contestants.push_back({

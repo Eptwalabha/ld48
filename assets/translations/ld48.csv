@@ -21,8 +21,8 @@ shop_item_name_bucket_0	Toy bucket
 shop_item_name_bucket_1	Iron bucket
 shop_item_name_bucket_2	Cauldron
 shop_item_description_bucket_0	A small bucket that can carry only sand
-shop_item_description_bucket_1	A bigger bucket. It can carry sand as well as stone
-shop_item_description_bucket_2	The best bucket. It’s deep. Careful not to fall inside.
+shop_item_description_bucket_1	A bigger bucket.\nIt can carry sand as well as stone
+shop_item_description_bucket_2	The best bucket. It’s deep.\nCareful not to fall inside.
 shop_item_price	It cost %s capsules
 shop_item_name_explosive_0	A grenade
 shop_item_name_explosive_1	A small bag of grenades
@@ -31,7 +31,7 @@ shop_item_description_explosive_0	I should not sell that to kids…
 shop_item_description_explosive_1	Because one explosion is never enough
 shop_item_description_explosive_2	Ha ha… grenade goes brrr
 not_enough_money	Sorry, kid. I can’t give credit.\nCome back when you’re a little, mmm… richer!
-thank_you	Thanks for the capsules! Come back anytime soon
+thank_you	Thanks for the capsules!\nCome back anytime soon
 contest_menu_title	Today’s contests
 contest_menu_enter_btn	Enter this contest
 contest_name_0	For the beginners
@@ -39,4 +39,4 @@ contest_name_1	For the novice
 contest_name_2	Dig dug
 contest_name_3	Are you diggin’ son?
 contest_name	Contest’s name
-best_rank	Your best rank
+best_rank	Best rank

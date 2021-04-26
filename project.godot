@@ -145,6 +145,10 @@ window/stretch/aspect="keep"
 
 browser=false
 
+[gui]
+
+theme/custom_font="res://assets/fonts/font_text.tres"
+
 [importer_defaults]
 
 texture={
