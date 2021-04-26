@@ -97,10 +97,12 @@ var shop = {
 
 
 var contests = [
-	{ "duration": 0.1,	"price": [200, 100, 50],	"results": [4, 8],		"podium": -1,	"best": 0 },
-	{ "duration": 2.0,	"price": [500, 200, 100],	"results": [6, 10],		"podium": -1,	"best": 0 },
+	{ "duration": 0.5,	"price": [200, 100, 50],	"results": [4, 8],		"podium": -1,	"best": 0 },
+	{ "duration": 1.0,	"price": [500, 200, 100],	"results": [6, 10],		"podium": -1,	"best": 0 },
 	{ "duration": 2.0,	"price": [500, 200, 100],	"results": [10, 20],	"podium": -1,	"best": 0 },
 	{ "duration": 1.0,	"price": [800, 400, 200],	"results": [10, 20],	"podium": -1,	"best": 0 },
+	{ "duration": 1.5,	"price": [1500, 1000, 400],	"results": [20, 30],	"podium": -1,	"best": 0 },
+	{ "duration": 3,	"price": [3000, 2000, 1000],	"results": [30, 50],	"podium": -1,	"best": 0 },
 ]
 
 var current_contest = null if !DEBUG else contests[0]
@@ -120,6 +122,7 @@ func save_result() -> void:
 	var depth = last_results["depth"]
 	var podium = last_results["podium"]
 	if podium < 3:
+		player_money += current_contest["price"][podium]
 		var old_podium = contests[current_id]["podium"]
 		if old_podium == -1:
 			contests[current_id]["podium"] = podium

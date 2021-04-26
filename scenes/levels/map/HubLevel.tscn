@@ -46,7 +46,7 @@ rotation = 1.57079
 shape = SubResource( 1 )
 
 [node name="Start" parent="." index="5"]
-position = Vector2( 245.611, -89.4342 )
+position = Vector2( 544.953, -46.6711 )
 
 [node name="ContextLabel" type="Label" parent="CanvasLayer" index="1"]
 margin_left = 289.596

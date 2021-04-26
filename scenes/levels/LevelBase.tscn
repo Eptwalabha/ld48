@@ -210,9 +210,9 @@ __meta__ = {
 }
 
 [node name="Control" type="MarginContainer" parent="CanvasLayer/Control2"]
-margin_left = 477.0
-margin_right = 547.0
-margin_bottom = 71.0
+margin_left = 473.0
+margin_right = 551.0
+margin_bottom = 91.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
@@ -225,8 +225,8 @@ __meta__ = {
 [node name="Timer" type="Label" parent="CanvasLayer/Control2/Control"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 50.0
-margin_bottom = 51.0
+margin_right = 58.0
+margin_bottom = 71.0
 text = "time
 "
 align = 1

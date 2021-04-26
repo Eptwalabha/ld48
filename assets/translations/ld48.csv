@@ -34,9 +34,14 @@ not_enough_money	Sorry, kid. I can’t give credit.\nCome back when you’re a l
 thank_you	Thanks for the capsules!\nCome back anytime soon
 contest_menu_title	Today’s contests
 contest_menu_enter_btn	Enter this contest
+contest_name	Contest’s name
+best_rank	Best rank
+your_rank	Your rank: #%s
+your_gain	You gain %s capsules
+no_gain	You gain nothing… what a shame
 contest_name_0	For the beginners
 contest_name_1	For the novice
 contest_name_2	Dig dug
 contest_name_3	Are you diggin’ son?
-contest_name	Contest’s name
-best_rank	Best rank
+contest_name_4	
+contest_name_5	

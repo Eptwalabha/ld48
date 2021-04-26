@@ -247,5 +247,5 @@ func _on_CompetitionLevel_fadeout_end():
 			"contestants": contestants,
 			"podium": podium
 		}
-		var _osef = get_tree().change_scene("res://scenes/levels/map/HubLevel.tscn")
 		GameAutoload.save_result()
+		var _osef = get_tree().change_scene("res://scenes/levels/map/GameOverLevel.tscn")

@@ -25,9 +25,9 @@ __meta__ = {
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -138.0
+margin_right = 1024.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -39,15 +39,14 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 1004.0
+margin_right = 442.0
 margin_bottom = 118.0
-size_flags_horizontal = 5
+size_flags_horizontal = 0
 custom_constants/separation = 64
 alignment = 1
 
 [node name="Shovel" type="Button" parent="MarginContainer/HBoxContainer"]
-margin_left = 281.0
-margin_right = 379.0
+margin_right = 98.0
 margin_bottom = 98.0
 rect_min_size = Vector2( 98, 98 )
 flat = true
@@ -68,8 +67,8 @@ __meta__ = {
 }
 
 [node name="Bucket" type="Button" parent="MarginContainer/HBoxContainer"]
-margin_left = 443.0
-margin_right = 541.0
+margin_left = 162.0
+margin_right = 260.0
 margin_bottom = 98.0
 rect_min_size = Vector2( 98, 98 )
 size_flags_horizontal = 5
@@ -92,8 +91,8 @@ __meta__ = {
 }
 
 [node name="Explosive" type="Button" parent="MarginContainer/HBoxContainer"]
-margin_left = 605.0
-margin_right = 703.0
+margin_left = 324.0
+margin_right = 422.0
 margin_bottom = 98.0
 rect_min_size = Vector2( 98, 98 )
 flat = true
