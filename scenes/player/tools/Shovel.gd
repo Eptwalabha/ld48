@@ -19,8 +19,9 @@ func _block_radius(quality: int) -> float:
 		QUALITY.SUPER: return 2.0
 		_: return 0.5
 
-func action_start(mouse: Vector2) -> void:
-	start_position = mouse
+func action_start(position: Vector2) -> void:
+	start_position = position
 
-func action_end(mouse: Vector2) -> void:
-	emit_signal("throw", start_position, mouse, 800)
+func action_end(position: Vector2) -> void:
+	if (start_position - position).length() > 16:
+		emit_signal("throw", start_position, position, 800)

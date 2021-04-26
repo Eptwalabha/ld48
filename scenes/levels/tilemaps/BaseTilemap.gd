@@ -28,7 +28,6 @@ func solidify_block_at(block_position: Vector2, type: int) -> void:
 func get_blocks(position: Vector2, radius: float, filter: Array) -> Array:
 	var p = world_to_map(position)
 	var list = []
-	var neighbors = [Vector2.LEFT, Vector2.UP, Vector2.DOWN, Vector2.RIGHT]
 	for x in range(-radius, radius + 1):
 		for y in range(-radius, radius + 1):
 			var d = Vector2(x, y)

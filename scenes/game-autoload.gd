@@ -20,14 +20,14 @@ enum TOOL_QUALITY {
 }
 
 var is_shovel_unlocked = true
-var is_bucket_unlocked = true
+var is_bucket_unlocked = false
 var is_explosive_unlocked = false
 
 var player_money = 0
 var player_tools = {
-	"shovel": TOOL_QUALITY.NICE,
-	"bucket": TOOL_QUALITY.SUPER,
-	"explosive": 0
+	"shovel": TOOL_QUALITY.BASIC,
+	"bucket": TOOL_QUALITY.BASIC,
+	"explosive": 100
 }
 
 var shop = {

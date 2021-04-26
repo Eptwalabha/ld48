@@ -5,6 +5,7 @@ signal throw_dirt
 signal throw_dirt_shovel(from, direction, shovel)
 signal fill_bucket(position, bucket)
 signal empty_bucket(position, blocks, bucket)
+signal spawn_explosive(position, direction, explosive)
 
 export(float) var j_duration := .5
 export(float) var j_tiles := 5.0
@@ -13,9 +14,11 @@ export(int) var max_range := 3
 
 var ShovelScene = preload("res://scenes/player/tools/Shovel.tscn")
 var BucketScene = preload("res://scenes/player/tools/Bucket.tscn")
+var ExplosiveScene = preload("res://scenes/player/tools/Explosive.tscn")
 
 var shovel: Shovel = null
 var bucket: Bucket = null
+var explosive: Explosive = null
 
 onready var anim_tree : AnimationTree = $AnimationTree
 onready var throw_position: Position2D = $Pivot/Dirt
@@ -61,6 +64,12 @@ func initialize_tools() -> void:
 		bucket.connect("empty", self, "_on_Bucket_empty")
 		add_child(bucket)
 		current_tool = bucket
+	if GameAutoload.is_explosive_unlocked:
+		explosive = ExplosiveScene.instance()
+		explosive.initialize(GameAutoload.player_tools["explosive"])
+		explosive.connect("spawn", self, "_on_Explosive_spawn")
+		add_child(explosive)
+		current_tool = explosive
 
 func dig() -> void:
 	if is_digging():
@@ -158,3 +167,7 @@ func _on_Bucket_fill(position: Vector2, capacity) -> void:
 
 func _on_Bucket_empty(position: Vector2, blocks: Array) -> void:
 	emit_signal("empty_bucket", position, blocks, bucket)
+
+func _on_Explosive_spawn(from: Vector2, to: Vector2, force: int) -> void:
+	var direction = (to - from).normalized() * force
+	emit_signal("spawn_explosive", from, direction, explosive)

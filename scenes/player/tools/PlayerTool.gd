@@ -6,10 +6,10 @@ var BLOCK = GameAutoload.BLOCK_TYPE
 func initialize(_quality: int) -> void:
 	pass
 
-func action_start(_mouse: Vector2) -> void:
+func action_start(_position: Vector2) -> void:
 	pass
 
-func action_end(_mouse: Vector2) -> void:
+func action_end(_position: Vector2) -> void:
 	pass
 
 func get_block_filters(quality: int) -> Array:
