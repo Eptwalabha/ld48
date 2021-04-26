@@ -31,8 +31,10 @@ func reset_level() -> void:
 	game_timer_label.hide()
 
 func start() -> void:
-#	startup_timer.start(1.0)
-	start_competition() # TODO remove
+	if GameAutoload.DEBUG:
+		start_competition() # TODO remove
+	else:
+		startup_timer.start(1.0)
 
 func start_competition() -> void:
 	game_start = true
