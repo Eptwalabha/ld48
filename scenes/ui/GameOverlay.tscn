@@ -1,0 +1,166 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/ui/GameOverlay.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/menu.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "start"
+length = 5.0
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "end_of_count_down" ],
+"method": "emit_signal"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CountDown/Dig:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3.4, 3.7, 4.3, 4.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 509.424, 710.269 ), Vector2( 509.424, 710.269 ), Vector2( 506.904, 400.329 ), Vector2( 506.904, 400.329 ), Vector2( 509.424, 710.269 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CountDown/3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.5, 2.8, 3.2, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -341.228, 473.679 ), Vector2( -341.228, 473.679 ), Vector2( 438.663, 366.586 ), Vector2( 574.734, 364.066 ), Vector2( 1218.55, 491.318 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CountDown/2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.5, 1.8, 2.2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -278.371, 484.904 ), Vector2( -278.371, 484.904 ), Vector2( 437.444, 358.011 ), Vector2( 574.596, 365.211 ), Vector2( 1220.94, 492.463 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CountDown/1:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8, 1.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -330.004, 471.434 ), Vector2( -330.004, 471.434 ), Vector2( 438.635, 356.85 ), Vector2( 575.663, 359.463 ), Vector2( 1218.22, 493.014 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CountDown/1:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.4, 1, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CountDown/3:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 2.4, 3, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CountDown/2:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 1.4, 2, 2.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("CountDown/Dig:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 3.5, 3.7, 4, 4.3, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.95047, 1.95047 ), Vector2( 1.5968, 1.5968 ), Vector2( 1.95047, 1.95047 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/menu.png-4a73871ba7d618b504d3b4e224dc9d8a.stex"
+
+[node name="GameOverlay" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/start = SubResource( 1 )
+
+[node name="CountDown" type="Node2D" parent="."]
+
+[node name="1" type="Sprite" parent="CountDown"]
+modulate = Color( 0.137255, 0.584314, 0.592157, 1 )
+position = Vector2( -330.004, 471.434 )
+texture = SubResource( 2 )
+region_enabled = true
+region_rect = Rect2( 141, 88, 61, 98 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="Sprite" parent="CountDown"]
+modulate = Color( 0.137255, 0.584314, 0.592157, 1 )
+position = Vector2( -278.371, 484.904 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 215, 89, 70, 96 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="3" type="Sprite" parent="CountDown"]
+modulate = Color( 0.137255, 0.584314, 0.592157, 1 )
+position = Vector2( -341.228, 473.679 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 288, 90, 68, 90 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Dig" type="Sprite" parent="CountDown"]
+modulate = Color( 0.819608, 0.705882, 0.321569, 1 )
+position = Vector2( 509.424, 710.269 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 39, 200, 227, 114 )

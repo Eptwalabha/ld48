@@ -5,12 +5,10 @@ signal end_of_theard(thread)
 var GrenadeScene = preload("res://scenes/player/tools/Grenade.tscn")
 var BlockScene = preload("res://scenes/DirtBlock.tscn")
 
-onready var countdown_label: Label = $CanvasLayer/CountdownStart
 onready var game_timer_label: Label = $CanvasLayer/Countdown
 onready var map: BaseTilemap = $Tilemap
 onready var tool_ui: UITool = $CanvasLayer/UITool
 
-onready var startup_timer: Timer = $StartupTimer
 onready var game_timer: Timer = $GameTimer
 var sec_start: int = 4
 var game_start: bool = false
@@ -22,26 +20,26 @@ func _ready() -> void:
 	start()
 
 func reset_level() -> void:
+	tool_ui.visible = false
 	game_start = false
 	set_player_control(false)
 	player.global_position = start.global_position
 	sec_start = 4
-	startup_timer.stop()
 	game_timer.stop()
-	countdown_label.hide()
 	game_timer_label.hide()
 
 func start() -> void:
 	if GameAutoload.DEBUG:
 		start_contest()
 	else:
-		startup_timer.start(1.0)
+		$CanvasLayer/GameOverlay.start()
 
 func start_contest() -> void:
 	tool_ui.set_current(player.current_tool.type)
+	tool_ui.visible = true
 	game_start = true
 	set_player_control(true)
-	game_timer.start()
+	game_timer.start(GameAutoload.current_contest["duration"] * 60.0)
 	game_timer_label.show()
 
 func _process(_delta: float) -> void:
@@ -90,17 +88,6 @@ func _spawn_blocks(args) -> void:
 
 func _end_of_theard(thread: Thread):
 	thread.wait_to_finish()
-
-func _on_StartupTimer_timeout():
-	sec_start -= 1
-	if sec_start == 0:
-		countdown_label.hide()
-		startup_timer.stop()
-		start_contest()
-	else:
-		countdown_label.show()
-		countdown_label.text = "%s" % sec_start
-		startup_timer.start(1.0)
 
 func _on_GameTimer_timeout():
 	game_start = false
@@ -195,3 +182,6 @@ func _on_Player_change_tool(tool_type):
 
 func _on_UITool_tool_clicked(tool_type):
 	player.change_tool(tool_type)
+
+func _on_GameOverlay_end_of_count_down():
+	start_contest()
