@@ -252,9 +252,6 @@ texture = ExtResource( 3 )
 [node name="Dirt" type="Position2D" parent="Pivot"]
 position = Vector2( 5, -32 )
 
-[node name="Throw" type="Position2D" parent="Pivot/Dirt"]
-position = Vector2( 35, -19.25 )
-
 [node name="SpadePivot" type="Node2D" parent="Pivot"]
 position = Vector2( -2.75, -21.5 )
 __meta__ = {
@@ -296,6 +293,13 @@ collision_mask = 2
 position = Vector2( 8, 0 )
 enabled = true
 cast_to = Vector2( 0, 16 )
+collision_mask = 2
+
+[node name="MapReach" type="RayCast2D" parent="."]
+position = Vector2( 0, -32 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( -80, 0 )
 collision_mask = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

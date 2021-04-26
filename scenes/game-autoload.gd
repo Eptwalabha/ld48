@@ -25,7 +25,7 @@ var is_explosive_unlocked = false
 
 var player_money = 0
 var player_tools = {
-	"shovel": TOOL_QUALITY.BASIC,
+	"shovel": TOOL_QUALITY.SUPER,
 	"bucket": TOOL_QUALITY.BASIC,
 	"explosive": 100
 }

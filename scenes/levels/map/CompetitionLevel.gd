@@ -13,6 +13,7 @@ onready var startup_timer: Timer = $StartupTimer
 onready var game_timer: Timer = $GameTimer
 var sec_start: int = 4
 var game_start: bool = false
+var cursor_last_cell_index = null
 
 func _ready() -> void:
 	set_camera_limit(-400, 1800, 16, 1264)
@@ -45,9 +46,25 @@ func _process(_delta: float) -> void:
 	update_timer_label()
 	
 	if Input.is_action_just_pressed("action"):
-		player.action_start(get_global_mouse_position())
+		player.action_start(get_global_mouse_position(), cursor_last_cell_index)
 	if Input.is_action_just_released("action"):
-		player.action_end(get_global_mouse_position())
+		player.action_end(get_global_mouse_position(), cursor_last_cell_index)
+	update_player_reach()
+
+func update_player_reach() -> void:
+	if player.is_map_reach_colliding():
+		var collider = player.get_map_reach_collider()
+		update_cursor(collider)
+	else:
+		cursor_last_cell_index = null
+
+func update_cursor(collider) -> void:
+	var position = player.get_map_reach_collider_point()
+	var cell_index = map.world_to_map(position)
+	if cursor_last_cell_index != cell_index:
+		cursor_last_cell_index = cell_index
+		var blocks = map.get_blocks(cell_index, player.current_tool.radius, player.current_tool.filter)
+		map.update_cursor(blocks)
 
 func update_timer_label() -> void:
 	game_timer_label.text = "%.1f" % game_timer.time_left
@@ -78,9 +95,10 @@ func _on_GameTimer_timeout():
 	game_start = false
 	can_control_player = false
 
-func _on_Player_throw_dirt_shovel(position: Vector2, direction: Vector2, shovel: Shovel):
+func _on_Player_throw_dirt_shovel(cell: Vector2, direction: Vector2, shovel: Shovel):
 	player.dig()
-	var blocks = map.get_blocks(position, shovel.radius, shovel.filter)
+	map.hide_cursor()
+	var blocks = map.get_blocks(cell, shovel.radius, shovel.filter)
 	var throw_position: Vector2 = player.throw_position.global_position
 	var blocks_to_spawn = []
 	for block in blocks:

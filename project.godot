@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/tools/Bucket.gd"
 }, {
+"base": "Node2D",
+"class": "Cursor",
+"language": "GDScript",
+"path": "res://scenes/player/Cursor.gd"
+}, {
 "base": "PlayerTool",
 "class": "Explosive",
 "language": "GDScript",
@@ -68,6 +73,7 @@ _global_script_class_icons={
 "BaseTilemap": "",
 "BlockSelector": "",
 "Bucket": "",
+"Cursor": "",
 "Explosive": "",
 "Grenade": "",
 "Level": "",

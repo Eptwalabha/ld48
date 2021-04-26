@@ -3,13 +3,16 @@ class_name PlayerTool extends Node2D
 var QUALITY = GameAutoload.TOOL_QUALITY
 var BLOCK = GameAutoload.BLOCK_TYPE
 
-func initialize(_quality: int) -> void:
+var filter: Array = []
+var radius: float = 0.0
+
+func initialize(quality: int) -> void:
+	filter = get_block_filters(quality)
+
+func action_start(_position: Vector2, _cell) -> void:
 	pass
 
-func action_start(_position: Vector2) -> void:
-	pass
-
-func action_end(_position: Vector2) -> void:
+func action_end(_position: Vector2, _cell) -> void:
 	pass
 
 func get_block_filters(quality: int) -> Array:

@@ -5,15 +5,13 @@ signal empty(position, blocks)
 
 var cooldown: bool = false
 
-var filter: Array = []
-var radius: float = 0.0
 var reach: float = 5.0
 
 var blocks: Array = []
 var capacity: int = 10
 
 func initialize(quality: int) -> void:
-	filter = get_block_filters(quality)
+	.initialize(quality)
 	radius = _block_radius(quality)
 	capacity = _block_capacity(quality)
 
@@ -40,7 +38,7 @@ func _block_capacity(quality: int) -> int:
 		QUALITY.SUPER: return 12
 		_: return 2
 
-func action_start(mouse: Vector2) -> void:
+func action_start(mouse: Vector2, _cell) -> void:
 	if cooldown:
 		return
 	$Cooldown.start()

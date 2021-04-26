@@ -82,6 +82,18 @@ func is_moving() -> bool:
 func get_tool() -> int:
 	return 0
 
+func update_map_reach_collider() -> void:
+	$MapReach.rotation = $MapReach.global_position.angle_to_point(get_global_mouse_position())
+
+func get_map_reach_collider() -> Object:
+	return $MapReach.get_collider()
+
+func get_map_reach_collider_point() -> Vector2:
+	return $MapReach.get_collision_point()
+
+func is_map_reach_colliding() -> bool:
+	return $MapReach.is_colliding()
+
 func process(_delat: float) -> void:
 	if Input.is_action_just_pressed("move_left"):
 		pivot_left(true)
@@ -95,16 +107,15 @@ func process(_delat: float) -> void:
 
 	action_move_left = Input.is_action_pressed("move_left")
 	action_move_right = Input.is_action_pressed("move_right")
-
+	update_map_reach_collider()
 
 func pivot_left(left: bool) -> void:
 	var s: float = -1.0 if left else 1.0
 	$Pivot.scale.x = s
 
+# TODO remove
 func get_throw_vectors() -> Array:
-	var p = $Pivot/Dirt.global_position
-	var d = $Pivot/Dirt/Throw.global_position - p
-	return [p, d.normalized() * 800]
+	return []
 
 func is_digging() -> bool:
 	return state_machine.get_current_node() == "dig"
@@ -150,17 +161,17 @@ func update_anim_tree() -> void:
 func is_realy_on_floor() -> bool:
 	return is_on_floor() or $FloorL.is_colliding() or $FloorM.is_colliding() or $FloorR.is_colliding()
 
-func action_start(mouse: Vector2) -> void:
+func action_start(mouse: Vector2, cell) -> void:
 	if current_tool != null:
-		current_tool.action_start(mouse)
+		current_tool.action_start(mouse, cell)
 
-func action_end(mouse: Vector2) -> void:
+func action_end(mouse: Vector2, cell) -> void:
 	if current_tool != null:
-		current_tool.action_end(mouse)
+		current_tool.action_end(mouse, cell)
 
-func _on_Shovel_throw(from: Vector2, to: Vector2, force: int) -> void:
-	var direction = (to - $Pivot/Dirt/Throw.global_position).normalized() * force
-	emit_signal("throw_dirt_shovel", from, direction, shovel)
+func _on_Shovel_throw(cell: Vector2, end_drag: Vector2, force: int) -> void:
+	var direction = (end_drag - throw_position.global_position).normalized() * force
+	emit_signal("throw_dirt_shovel", cell, direction, shovel)
 
 func _on_Bucket_fill(position: Vector2, capacity) -> void:
 	emit_signal("fill_bucket", position, capacity, bucket)

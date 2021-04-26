@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/ressources/tileset-block.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/levels/tilemaps/BaseTilemap.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player/Cursor.tscn" type="PackedScene" id=3]
 
 [node name="BaseTilemap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -11,3 +12,5 @@ collision_layer = 2
 collision_mask = 0
 format = 1
 script = ExtResource( 2 )
+
+[node name="Cursor" parent="." instance=ExtResource( 3 )]

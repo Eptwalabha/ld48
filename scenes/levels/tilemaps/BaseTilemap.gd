@@ -1,5 +1,13 @@
 class_name BaseTilemap extends TileMap
 
+onready var cursor: Cursor = $Cursor
+
+func hide_cursor() -> void:
+	cursor.update_blocks([])
+
+func update_cursor(blocks: Array) -> void:
+	cursor.update_blocks(blocks)
+
 func solidify_block(block) -> void:
 	solidify_block_at(block.global_position, block.type)
 	block.queue_free()
@@ -25,15 +33,14 @@ func solidify_block_at(block_position: Vector2, type: int) -> void:
 			if i < limit:
 				_set_tile(cell_index.x, cell_index.y - i, type)
 
-func get_blocks(position: Vector2, radius: float, filter: Array) -> Array:
-	var p = world_to_map(position)
+func get_blocks(cell_index: Vector2, radius: float, filter: Array) -> Array:
 	var list = []
 	for x in range(-radius, radius + 1):
 		for y in range(-radius, radius + 1):
 			var d = Vector2(x, y)
 			if float(abs(d.x) + abs(d.y)) >= radius:
 				continue
-			var p2 = p + d
+			var p2 = cell_index + d
 			var m = get_cellv(p2)
 			if filter.has(m):
 				list.push_back(p2)
