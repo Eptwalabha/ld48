@@ -50,11 +50,6 @@ _global_script_classes=[ {
 "path": "res://scenes/levels/Level.gd"
 }, {
 "base": "Node2D",
-"class": "LevelBase",
-"language": "GDScript",
-"path": "res://scenes/levels/LevelBase.gd"
-}, {
-"base": "Node2D",
 "class": "MapTrigger",
 "language": "GDScript",
 "path": "res://scenes/levels/triggers/MapTrigger.gd"
@@ -108,7 +103,6 @@ _global_script_class_icons={
 "GameOverlay": "",
 "Grenade": "",
 "Level": "",
-"LevelBase": "",
 "MapTrigger": "",
 "MenuContest": "",
 "MenuContestLine": "",

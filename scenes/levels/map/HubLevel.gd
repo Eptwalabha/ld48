@@ -13,7 +13,7 @@ var current_state: int = HUB_STATE.PLAYING
 
 func _ready() -> void:
 	context_label.hide()
-	set_camera_limit(-600, 190, 20, 1500)
+	set_camera_limit(-10000, 190, 20, 1500)
 	for node in get_children():
 		if node is MapTrigger:
 			node.connect("body_entered", self, "_on_MapTrigger_entered")
