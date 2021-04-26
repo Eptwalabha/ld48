@@ -93,3 +93,27 @@ func _spawn_blocks(args) -> void:
 
 func _end_of_theard(thread: Thread):
 	thread.wait_to_finish()
+
+func _on_Player_empty_bucket(position: Vector2, blocks: Array, bucket: Bucket):
+	bucket.empty()
+	var x = 300 if position.x > player.global_position.x else -300
+	var throw_position: Vector2 = player.throw_position.global_position
+	var thread = Thread.new()
+	thread.start(self, "_spawn_blocks", [blocks, throw_position, Vector2(x, 200), thread])
+
+func _on_Player_fill_bucket(position: Vector2, capacity_left: int, bucket: Bucket):
+	var blocks = map.get_blocks(position, bucket.radius, bucket.filter)
+	if len(blocks) == 0:
+		bucket.force_empty(position)
+		return
+	var i = 0
+	for block in blocks:
+		if i >= capacity_left:
+			break
+		i += 1
+		bucket.add_block(map.get_cellv(block))
+		map.set_cellv(block, -1)
+		map.update_bitmask_area(block)
+
+func _on_Player_throw_grenade(_position, _grenade):
+	pass

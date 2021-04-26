@@ -3,6 +3,8 @@ class_name Player extends KinematicBody2D
 # warning-ignore:unused_signal
 signal throw_dirt
 signal throw_dirt_shovel(from, direction, shovel)
+signal fill_bucket(position, bucket)
+signal empty_bucket(position, blocks, bucket)
 
 export(float) var j_duration := .5
 export(float) var j_tiles := 5.0
@@ -10,8 +12,11 @@ export(int) var max_range := 3
 
 
 var ShovelScene = preload("res://scenes/player/tools/Shovel.tscn")
+var BucketScene = preload("res://scenes/player/tools/Bucket.tscn")
 
 var shovel: Shovel = null
+var bucket: Bucket = null
+
 onready var anim_tree : AnimationTree = $AnimationTree
 onready var throw_position: Position2D = $Pivot/Dirt
 var state_machine: AnimationNodeStateMachinePlayback
@@ -47,7 +52,15 @@ func initialize_tools() -> void:
 		shovel = ShovelScene.instance()
 		shovel.initialize(GameAutoload.player_tools["shovel"])
 		shovel.connect("throw", self, "_on_Shovel_throw")
+		add_child(shovel)
 		current_tool = shovel
+	if GameAutoload.is_bucket_unlocked:
+		bucket = BucketScene.instance()
+		bucket.initialize(GameAutoload.player_tools["bucket"])
+		bucket.connect("fill", self, "_on_Bucket_fill")
+		bucket.connect("empty", self, "_on_Bucket_empty")
+		add_child(bucket)
+		current_tool = bucket
 
 func dig() -> void:
 	if is_digging():
@@ -139,3 +152,9 @@ func action_end(mouse: Vector2) -> void:
 func _on_Shovel_throw(from: Vector2, to: Vector2, force: int) -> void:
 	var direction = (to - $Pivot/Dirt/Throw.global_position).normalized() * force
 	emit_signal("throw_dirt_shovel", from, direction, shovel)
+
+func _on_Bucket_fill(position: Vector2, capacity) -> void:
+	emit_signal("fill_bucket", position, capacity, bucket)
+
+func _on_Bucket_empty(position: Vector2, blocks: Array) -> void:
+	emit_signal("empty_bucket", position, blocks, bucket)

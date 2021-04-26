@@ -55,6 +55,8 @@ __meta__ = {
 [node name="GameTimer" type="Timer" parent="." index="8"]
 wait_time = 60.0
 
+[connection signal="empty_bucket" from="Player" to="." method="_on_Player_empty_bucket"]
+[connection signal="fill_bucket" from="Player" to="." method="_on_Player_fill_bucket"]
 [connection signal="throw_dirt_shovel" from="Player" to="." method="_on_Player_throw_dirt_shovel"]
 [connection signal="timeout" from="StartupTimer" to="." method="_on_StartupTimer_timeout"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
