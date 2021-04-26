@@ -56,6 +56,7 @@ func update_player_reach() -> void:
 		var collider = player.get_map_reach_collider()
 		update_cursor(collider)
 	else:
+		map.hide_cursor()
 		cursor_last_cell_index = null
 
 func update_cursor(collider) -> void:
@@ -131,10 +132,11 @@ func _on_Player_empty_bucket(position: Vector2, blocks: Array, bucket: Bucket):
 	var thread = Thread.new()
 	thread.start(self, "_spawn_blocks", [blocks_to_spawn, thread])
 
-func _on_Player_fill_bucket(position: Vector2, capacity_left: int, bucket: Bucket):
-	var blocks = map.get_blocks(position, bucket.radius, bucket.filter)
+func _on_Player_fill_bucket(cell: Vector2, capacity_left: int, bucket: Bucket):
+	var blocks = map.get_blocks(cell, bucket.radius, bucket.filter)
+	map.hide_cursor()
 	if len(blocks) == 0:
-		bucket.force_empty(position)
+		bucket.force_empty(get_global_mouse_position())
 		return
 	var i = 0
 	for block in blocks:

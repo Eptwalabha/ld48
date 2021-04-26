@@ -3,7 +3,6 @@ class_name Shovel extends PlayerTool
 signal throw(from, to, force)
 
 var reach: float = 5.0
-var dig_started: bool = false
 
 var start_position: Vector2 = Vector2.ZERO
 var start_cell: Vector2 = Vector2.ZERO
@@ -21,11 +20,11 @@ func _block_radius(quality: int) -> float:
 
 func action_start(position: Vector2, cell) -> void:
 	if cell != null:
-		dig_started = true
+		is_tool_currently_used = true
 		start_position = position
 		start_cell = cell
 
 func action_end(position: Vector2, _cell) -> void:
-	if (position - start_position).length() > 16 and dig_started:
-		dig_started = false
+	if (position - start_position).length() > 16 and is_tool_currently_used:
+		is_tool_currently_used = false
 		emit_signal("throw", start_cell, position, 800)

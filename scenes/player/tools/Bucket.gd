@@ -38,15 +38,15 @@ func _block_capacity(quality: int) -> int:
 		QUALITY.SUPER: return 12
 		_: return 2
 
-func action_start(mouse: Vector2, _cell) -> void:
+func action_start(mouse: Vector2, cell) -> void:
 	if cooldown:
 		return
-	$Cooldown.start()
-	cooldown = true
-	if len(blocks) < capacity:
-		emit_signal("fill", mouse, capacity - len(blocks))
+	if len(blocks) < capacity and cell != null:
+		emit_signal("fill", cell, capacity - len(blocks))
 	else:
 		emit_signal("empty", mouse, blocks)
+	$Cooldown.start()
+	cooldown = true
 
 func _on_Cooldown_timeout():
 	cooldown = false
