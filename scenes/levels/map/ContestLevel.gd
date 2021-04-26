@@ -5,6 +5,7 @@ signal end_of_theard(thread)
 var GrenadeScene = preload("res://scenes/player/tools/Grenade.tscn")
 var BlockScene = preload("res://scenes/DirtBlock.tscn")
 
+onready var line = $Line
 onready var game_timer_label: Label = $CanvasLayer/Countdown
 onready var map: BaseTilemap = $Tilemap
 onready var tool_ui: UITool = $CanvasLayer/UITool
@@ -13,6 +14,7 @@ onready var game_timer: Timer = $GameTimer
 var sec_start: int = 4
 var game_start: bool = false
 var cursor_last_cell_index = null
+var display_line_depth = false
 
 func _ready() -> void:
 	set_camera_limit(-400, 1800, 16, 1264)
@@ -20,6 +22,7 @@ func _ready() -> void:
 	start()
 
 func reset_level() -> void:
+	line.visible = false
 	tool_ui.visible = false
 	game_start = false
 	set_player_control(false)
@@ -83,6 +86,7 @@ func _spawn_blocks(args) -> void:
 		yield(get_tree().create_timer(0.02), "timeout")
 		var physics_block = BlockScene.instance()
 		map.add_block(physics_block)
+		var type = block["type"] if game_start else -1
 		physics_block.initialize(block["position"], block["velocity"], block["type"])
 	emit_signal("end_of_theard", args[1])
 
@@ -92,6 +96,7 @@ func _end_of_theard(thread: Thread):
 func _on_GameTimer_timeout():
 	game_start = false
 	set_player_control(false)
+	end_level()
 
 func _on_Player_throw_dirt_shovel(cell: Vector2, direction: Vector2, shovel: Shovel):
 	player.dig()
@@ -185,3 +190,25 @@ func _on_UITool_tool_clicked(tool_type):
 
 func _on_GameOverlay_end_of_count_down():
 	start_contest()
+
+var final_depth: int = 0
+
+func end_level() -> void:
+	player.hide()
+	tool_ui.hide()
+	map.end_of_level = true
+	var r: Rect2 = map.get_used_rect()
+	final_depth = map.hole_depth(0, int(r.size.x - 1), 0)
+	line.start_moving()
+	camera_target = line
+	yield(get_tree().create_timer(1.0), "timeout")
+	var line_tween: Tween = $Line/Tween
+	var position_end_at = Vector2(line.global_position.x, final_depth * 16)
+	display_line_depth = true
+	line_tween.interpolate_property(line, "global_position", line.global_position, position_end_at, 3.0, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	line_tween.start()
+	yield(line_tween, "tween_all_completed")
+	yield(get_tree().create_timer(2.0), "timeout")
+	fade(false)
+	yield(self, "fadeout_end")
+	get_tree().change_scene("res://scenes/levels/map/HubLevel.tscn")

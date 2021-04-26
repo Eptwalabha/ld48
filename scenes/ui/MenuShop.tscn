@@ -195,14 +195,15 @@ __meta__ = {
 }
 
 [node name="BASIC" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Shovels/HBoxContainer"]
-margin_left = 62.0
+margin_left = 51.0
 margin_top = 24.0
-margin_right = 94.0
+margin_right = 105.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
 size_flags_vertical = 4
 disabled = true
+text = "shovel"
 
 [node name="NICE" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Shovels/HBoxContainer"]
 margin_left = 223.0
@@ -213,6 +214,7 @@ rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
 size_flags_vertical = 4
 disabled = true
+text = "+1"
 
 [node name="SUPER" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Shovels/HBoxContainer"]
 margin_left = 385.0
@@ -223,6 +225,7 @@ rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
 size_flags_vertical = 4
 disabled = true
+text = "+2"
 
 [node name="Buckets" type="Control" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer"]
 margin_top = 84.0
@@ -253,14 +256,15 @@ __meta__ = {
 }
 
 [node name="BASIC" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Buckets/HBoxContainer"]
-margin_left = 62.0
+margin_left = 51.0
 margin_top = 24.0
-margin_right = 94.0
+margin_right = 106.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
 size_flags_vertical = 4
 disabled = true
+text = "bucket"
 
 [node name="NICE" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Buckets/HBoxContainer"]
 margin_left = 223.0
@@ -271,6 +275,7 @@ rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
 size_flags_vertical = 4
 disabled = true
+text = "+1"
 
 [node name="SUPER" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Buckets/HBoxContainer"]
 margin_left = 385.0
@@ -281,6 +286,7 @@ rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
 size_flags_vertical = 4
 disabled = true
+text = "+2"
 
 [node name="Explosives" type="Control" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer"]
 margin_top = 168.0
@@ -297,14 +303,15 @@ __meta__ = {
 }
 
 [node name="BASIC" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Explosives/HBoxContainer"]
-margin_left = 62.0
+margin_left = 45.0
 margin_top = 24.0
-margin_right = 94.0
+margin_right = 111.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
 size_flags_vertical = 4
 disabled = true
+text = "Grenade"
 
 [node name="NICE" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Explosives/HBoxContainer"]
 margin_left = 223.0
@@ -315,16 +322,18 @@ rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
 size_flags_vertical = 4
 disabled = true
+text = "x5"
 
 [node name="SUPER" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Explosives/HBoxContainer"]
-margin_left = 385.0
+margin_left = 383.0
 margin_top = 24.0
-margin_right = 417.0
+margin_right = 418.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
 size_flags_vertical = 4
 disabled = true
+text = "x10"
 
 [node name="Selection" type="Sprite" parent="MarginContainer/CenterContainer/Control/Control"]
 modulate = Color( 0.117647, 0.137255, 0.580392, 0.462745 )

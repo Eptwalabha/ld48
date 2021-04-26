@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/images/menu.png" type="Texture" id=1]
+[ext_resource path="res://scenes/ui/Line.gd" type="Script" id=2]
+
+[node name="Line" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 16 )
+scale = Vector2( 300, 10 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 30, 34, 8, 1 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -78.0
+margin_top = 22.1916
+margin_right = 78.0
+margin_bottom = 81.1916
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

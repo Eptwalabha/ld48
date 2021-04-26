@@ -97,7 +97,7 @@ var shop = {
 
 
 var contests = [
-	{ "duration": 1.0,	"price": [200, 100, 50],	"results": [4, 10],		"podium": -1,	"best": 0 },
+	{ "duration": 0.1,	"price": [200, 100, 50],	"results": [4, 10],		"podium": -1,	"best": 0 },
 	{ "duration": 2.0,	"price": [500, 200, 100],	"results": [6, 15],		"podium": -1,	"best": 0 },
 	{ "duration": 2.0,	"price": [500, 200, 100],	"results": [10, 20],	"podium": -1,	"best": 0 },
 	{ "duration": 1.0,	"price": [800, 400, 200],	"results": [10, 20],	"podium": -1,	"best": 0 },

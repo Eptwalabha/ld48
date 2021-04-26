@@ -1,6 +1,7 @@
 class_name BaseTilemap extends TileMap
 
 onready var cursor: Cursor = $Cursor
+var end_of_level: bool = false
 
 func hide_cursor() -> void:
 	cursor.update_blocks([])
@@ -18,6 +19,8 @@ func add_block(physics_block: RigidBody2D) -> void:
 	physics_block.connect("sleeping_state_changed", self, "_on_block_sleep", [physics_block])
 
 func solidify_block_at(block_position: Vector2, type: int) -> void:
+	if end_of_level:
+		return
 	var cell_index = world_to_map(block_position)
 	var is_cell_bellow_empty = get_cell(cell_index.x, cell_index.y + 1) == -1
 	if is_cell_bellow_empty:
