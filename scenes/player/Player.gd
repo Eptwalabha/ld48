@@ -217,7 +217,7 @@ func previous_tool() -> void:
 	change_tool(available_tools[i])
 
 func change_tool(next_tool_type: int) -> void:
-	if next_tool_type == current_tool.type:
+	if current_tool and next_tool_type == current_tool.type:
 		return
 	match next_tool_type:
 		GameAutoload.TOOL_TYPE.SHOVEL:

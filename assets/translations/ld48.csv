@@ -45,3 +45,9 @@ contest_name_2	Dig dug
 contest_name_3	Are you diggin’ son?
 contest_name_4	
 contest_name_5	
+yes	YES
+no	NO
+warning	Warning
+quit_the_game	You’re about to quit the game.\nAre you sure?
+quit	Yes, quit
+cancel	Cancel

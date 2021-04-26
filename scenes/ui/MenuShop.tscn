@@ -29,7 +29,7 @@ __meta__ = {
 }
 
 [node name="Name" type="Label" parent="Dialog/Item"]
-margin_right = 300.0
+margin_right = 332.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 align = 2
@@ -37,7 +37,7 @@ valign = 1
 
 [node name="Description" type="Label" parent="Dialog/Item"]
 margin_top = 37.0
-margin_right = 300.0
+margin_right = 332.0
 margin_bottom = 69.0
 rect_min_size = Vector2( 0, 32 )
 align = 2
@@ -45,7 +45,7 @@ valign = 1
 
 [node name="Price" type="Label" parent="Dialog/Item"]
 margin_top = 74.0
-margin_right = 300.0
+margin_right = 332.0
 margin_bottom = 106.0
 rect_min_size = Vector2( 0, 32 )
 align = 2
@@ -195,9 +195,9 @@ __meta__ = {
 }
 
 [node name="BASIC" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Shovels/HBoxContainer"]
-margin_left = 51.0
+margin_left = 46.0
 margin_top = 24.0
-margin_right = 105.0
+margin_right = 111.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
@@ -256,9 +256,9 @@ __meta__ = {
 }
 
 [node name="BASIC" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Buckets/HBoxContainer"]
-margin_left = 51.0
+margin_left = 45.0
 margin_top = 24.0
-margin_right = 106.0
+margin_right = 111.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
@@ -303,9 +303,9 @@ __meta__ = {
 }
 
 [node name="BASIC" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Explosives/HBoxContainer"]
-margin_left = 45.0
+margin_left = 39.0
 margin_top = 24.0
-margin_right = 111.0
+margin_right = 118.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
@@ -325,9 +325,9 @@ disabled = true
 text = "x5"
 
 [node name="SUPER" type="Button" parent="MarginContainer/CenterContainer/Control/Control/MarginContainer/VBoxContainer/Explosives/HBoxContainer"]
-margin_left = 383.0
+margin_left = 381.0
 margin_top = 24.0
-margin_right = 418.0
+margin_right = 420.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
@@ -349,9 +349,9 @@ rect_min_size = Vector2( 0, 64 )
 alignment = 1
 
 [node name="Buy" type="Button" parent="MarginContainer/CenterContainer/Control/HBoxContainer"]
-margin_left = 179.0
+margin_left = 159.0
 margin_top = 16.0
-margin_right = 321.0
+margin_right = 341.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 0, 32 )
 size_flags_vertical = 4

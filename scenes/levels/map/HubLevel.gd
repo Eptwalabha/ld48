@@ -44,6 +44,7 @@ func on_shop_interact() -> void:
 	set_player_control(false)
 	camera_target = $Shop/CameraFocus
 	$CanvasLayer/MenuShop.open()
+	in_menu = true
 
 func on_contest_interact() -> void:
 	show_interact(false)
@@ -51,19 +52,21 @@ func on_contest_interact() -> void:
 	set_player_control(false)
 	camera_target = $Contest/CameraFocus
 	$CanvasLayer/MenuContest.open()
+	in_menu = true
 
 func _on_MenuShop_close_menu():
 	show_interact(true)
 	current_state = HUB_STATE.PLAYING
 	set_player_control(true)
 	camera_target = $Player
+	in_menu = false
 
 func _on_MenuContest_close_menu():
 	show_interact(true)
 	current_state = HUB_STATE.PLAYING
 	set_player_control(true)
 	camera_target = $Player
-
+	in_menu = false
 
 func _on_MenuContest_enter_contest(id):
 	if GameAutoload.can_contest(id):

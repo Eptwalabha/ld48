@@ -1,7 +1,7 @@
 extends Node
 
-var DEBUG = true
-var MAX_EXPLOSIVE = 5
+var DEBUG = false
+var MAX_EXPLOSIVE = 6
 
 enum BLOCK_TYPE {
 	SAND = 6,
@@ -97,12 +97,12 @@ var shop = {
 
 
 var contests = [
-	{ "duration": 0.5,	"price": [200, 100, 50],	"results": [4, 8],		"podium": -1,	"best": 0 },
-	{ "duration": 1.0,	"price": [500, 200, 100],	"results": [6, 10],		"podium": -1,	"best": 0 },
-	{ "duration": 2.0,	"price": [500, 200, 100],	"results": [10, 20],	"podium": -1,	"best": 0 },
-	{ "duration": 1.0,	"price": [800, 400, 200],	"results": [10, 20],	"podium": -1,	"best": 0 },
-	{ "duration": 1.5,	"price": [1500, 1000, 400],	"results": [20, 30],	"podium": -1,	"best": 0 },
-	{ "duration": 3,	"price": [3000, 2000, 1000],	"results": [30, 50],	"podium": -1,	"best": 0 },
+	{ "duration": 0.5,	"price": [50, 30, 10],	"results": [4, 8],		"podium": -1,	"best": 0 },
+	{ "duration": 1.0,	"price": [80, 50, 20],	"results": [10, 14],		"podium": -1,	"best": 0 },
+	{ "duration": 1.0,	"price": [120, 70, 30],	"results": [14, 20],	"podium": -1,	"best": 0 },
+	{ "duration": 1.0,	"price": [200, 80, 40],	"results": [20, 35],	"podium": -1,	"best": 0 },
+	{ "duration": 1.5,	"price": [300, 100, 50],	"results": [35, 50],	"podium": -1,	"best": 0 },
+	{ "duration": 2,	"price": [500, 200, 100],	"results": [50, 70],	"podium": -1,	"best": 0 },
 ]
 
 var current_contest = null if !DEBUG else contests[0]
