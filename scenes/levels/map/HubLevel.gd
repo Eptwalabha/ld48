@@ -68,3 +68,7 @@ func _on_MenuContest_close_menu():
 func _on_MenuContest_enter_contest(id):
 	if GameAutoload.can_contest(id):
 		$CanvasLayer/MenuContest.close()
+		GameAutoload.set_current_contest(id)
+		fade(false)
+		yield(self, "fadeout_end")
+		get_tree().change_scene("res://scenes/levels/map/ContestLevel.tscn")

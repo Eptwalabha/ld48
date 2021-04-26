@@ -30,7 +30,7 @@ position = Vector2( 635.264, -33.4543 )
 [node name="Camera2D" parent="." index="5"]
 position = Vector2( 635.718, -60.5446 )
 
-[node name="Countdown" type="Label" parent="CanvasLayer" index="0"]
+[node name="Countdown" type="Label" parent="CanvasLayer" index="1"]
 margin_left = 365.587
 margin_top = 14.9831
 margin_right = 558.587
@@ -39,7 +39,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CountdownStart" type="Label" parent="CanvasLayer" index="1"]
+[node name="CountdownStart" type="Label" parent="CanvasLayer" index="2"]
 margin_left = 608.313
 margin_top = 32.9628
 margin_right = 801.313
