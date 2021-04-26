@@ -124,6 +124,7 @@ size_flags_vertical = 4
 flat = true
 
 [node name="Close" type="Sprite" parent="MarginContainer/CenterContainer/Control/HBoxContainer2/Close"]
+modulate = Color( 0.882353, 0.415686, 0.415686, 1 )
 position = Vector2( 16, 16 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
@@ -321,6 +322,12 @@ rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 6
 size_flags_vertical = 4
 disabled = true
+
+[node name="Selection" type="Sprite" parent="MarginContainer/CenterContainer/Control/Control"]
+modulate = Color( 0.117647, 0.137255, 0.580392, 0.462745 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 150, 5, 81, 82 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/Control"]
 margin_top = 396.0

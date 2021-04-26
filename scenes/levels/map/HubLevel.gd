@@ -20,7 +20,7 @@ func _ready() -> void:
 			node.connect("body_exited", self, "_on_MapTrigger_exited")
 
 func _process(_delta) -> void:
-	if Input.is_action_just_pressed("action"):
+	if Input.is_action_just_pressed("action") and current_state == HUB_STATE.PLAYING:
 		match current_trigger:
 			"shop": on_shop_interact()
 			"competition": on_competition_interact()

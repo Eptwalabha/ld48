@@ -21,13 +21,23 @@ enum TOOL_QUALITY {
 	SUPER,
 }
 
-var is_shovel_unlocked = true
-var is_bucket_unlocked = true
-var is_explosive_unlocked = false
+func item_price(item_type: String, item_quality: int) -> int:
+	return shop["items"][item_type][item_quality]["price"]
 
-var player_money = 0
+func buy_item(type, quality) -> void:
+	unlocked[type] = true
+	player_money -= item_price(type, quality)
+	player_tools[type] = quality
+
+var unlocked = {
+	"shovel": false,
+	"bucket": false,
+	"explosive": false,
+}
+
+var player_money = 10
 var player_tools = {
-	"shovel": TOOL_QUALITY.SUPER,
+	"shovel": TOOL_QUALITY.BASIC,
 	"bucket": TOOL_QUALITY.BASIC,
 	"explosive": 20
 }

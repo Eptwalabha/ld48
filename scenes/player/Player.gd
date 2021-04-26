@@ -51,20 +51,20 @@ func _ready():
 	jump = (h / d) * j_duration
 
 func initialize_tools() -> void:
-	if GameAutoload.is_shovel_unlocked:
+	if GameAutoload.unlocked["shovel"]:
 		shovel = ShovelScene.instance()
 		shovel.initialize(GameAutoload.player_tools["shovel"])
 		shovel.connect("throw", self, "_on_Shovel_throw")
 		add_child(shovel)
 		current_tool = shovel
-	if GameAutoload.is_bucket_unlocked:
+	if GameAutoload.unlocked["bucket"]:
 		bucket = BucketScene.instance()
 		bucket.initialize(GameAutoload.player_tools["bucket"])
 		bucket.connect("fill", self, "_on_Bucket_fill")
 		bucket.connect("empty", self, "_on_Bucket_empty")
 		add_child(bucket)
 		current_tool = bucket
-	if GameAutoload.is_explosive_unlocked:
+	if GameAutoload.unlocked["explosive"]:
 		explosive = ExplosiveScene.instance()
 		explosive.initialize(GameAutoload.player_tools["explosive"])
 		explosive.connect("spawn", self, "_on_Explosive_spawn")
