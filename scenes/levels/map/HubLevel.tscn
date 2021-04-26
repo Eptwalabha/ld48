@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/levels/tilemaps/HubTilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/levels/Level.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/map/HubLevel.gd" type="Script" id=3]
 [ext_resource path="res://scenes/levels/triggers/Shop.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/levels/triggers/Competition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/ui/MenuShop.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 300 )
@@ -15,8 +16,14 @@ script = ExtResource( 3 )
 [node name="Competition" parent="." index="1" instance=ExtResource( 5 )]
 position = Vector2( 814.908, 6.7348 )
 
+[node name="CameraFocus" type="Position2D" parent="Competition" index="3"]
+position = Vector2( -307.848, -88.9173 )
+
 [node name="Shop" parent="." index="2" instance=ExtResource( 4 )]
 position = Vector2( 298.575, -15.7144 )
+
+[node name="CameraFocus" type="Position2D" parent="Shop" index="3"]
+position = Vector2( 375.363, -66.468 )
 
 [node name="HubTilemap" parent="." index="3" instance=ExtResource( 1 )]
 
@@ -35,6 +42,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MenuShop" parent="CanvasLayer" index="1" instance=ExtResource( 6 )]
+visible = false
+
 [node name="Border" type="StaticBody2D" parent="." index="8"]
 collision_layer = 16
 collision_mask = 0
@@ -50,3 +60,5 @@ shape = SubResource( 1 )
 position = Vector2( 1348.7, 51.9882 )
 rotation = 1.57079
 shape = SubResource( 1 )
+
+[connection signal="close_menu" from="CanvasLayer/MenuShop" to="." method="_on_MenuShop_close_menu"]
