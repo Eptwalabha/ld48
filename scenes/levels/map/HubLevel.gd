@@ -64,3 +64,7 @@ func _on_MenuContest_close_menu():
 	set_player_control(true)
 	camera_target = $Player
 
+
+func _on_MenuContest_enter_contest(id):
+	if GameAutoload.can_contest(id):
+		$CanvasLayer/MenuContest.close()

@@ -54,10 +54,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/levels/triggers/MapTrigger.gd"
 }, {
-"base": "Reference",
+"base": "UIMenu",
 "class": "MenuContest",
 "language": "GDScript",
 "path": "res://scenes/ui/MenuContest.gd"
+}, {
+"base": "Control",
+"class": "MenuContestLine",
+"language": "GDScript",
+"path": "res://scenes/ui/MenuContestLine.gd"
 }, {
 "base": "UIMenu",
 "class": "MenuShop",
@@ -95,6 +100,7 @@ _global_script_class_icons={
 "LevelBase": "",
 "MapTrigger": "",
 "MenuContest": "",
+"MenuContestLine": "",
 "MenuShop": "",
 "Player": "",
 "PlayerTool": "",

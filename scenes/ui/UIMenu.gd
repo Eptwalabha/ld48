@@ -8,6 +8,9 @@ func open() -> void:
 func is_open() -> bool:
 	return visible
 
-func _on_Close_pressed():
+func close() -> void:
 	visible = false
 	emit_signal("close_menu")
+
+func _on_Close_pressed():
+	close()

@@ -47,13 +47,6 @@ func display_conversation(text: String) -> void:
 	dialog_dialog.visible = true
 	dialog_item.visible = false
 
-func is_open() -> bool:
-	return visible
-
-func _on_Close_pressed():
-	visible = false
-	emit_signal("close_menu")
-
 func update_selection(btn):
 	selection.visible = current_selection != null
 	var size = btn.rect_size
