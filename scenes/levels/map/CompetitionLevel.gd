@@ -56,14 +56,13 @@ func _process(_delta: float) -> void:
 		update_player_reach()
 
 func update_player_reach() -> void:
-	if player.is_map_reach_colliding():
-		var collider = player.get_map_reach_collider()
-		update_cursor(collider)
+	if player.is_map_reach_colliding() and player.get_map_reach_collider():
+		update_cursor()
 	else:
 		map.hide_cursor()
 		cursor_last_cell_index = null
 
-func update_cursor(collider) -> void:
+func update_cursor() -> void:
 	var position = player.get_map_reach_collider_point()
 	var cell_index = map.world_to_map(position)
 	if cursor_last_cell_index != cell_index:
@@ -104,7 +103,6 @@ func _on_Player_throw_dirt_shovel(cell: Vector2, direction: Vector2, shovel: Sho
 	player.dig()
 	map.hide_cursor()
 	var blocks = map.get_blocks(cell, shovel.radius, shovel.filter)
-	var throw_position: Vector2 = player.throw_position.global_position
 	var blocks_to_spawn = []
 	for block in blocks:
 		var r = Vector2(randf() * 32.0 - 16.0, randf() * 32.0 - 16.0) * 5
@@ -151,14 +149,15 @@ func _on_Player_fill_bucket(cell: Vector2, capacity_left: int, bucket: Bucket):
 		map.set_cellv(block, -1)
 		map.update_bitmask_area(block)
 
-func _on_Player_spawn_explosive(position, direction, explosive):
+func _on_Player_spawn_explosive(_position, direction, explosive):
 	var grenade = GrenadeScene.instance()
 	var throw_position: Vector2 = player.throw_position.global_position
 	grenade.initialize(throw_position, direction, explosive.filter)
 	map.add_child(grenade)
-	grenade.connect("blow_up", self, "_on_Grenade_blowup", [grenade])
+	grenade.connect("blow_up", self, "_on_Grenade_blowup", [grenade, explosive])
 
-func _on_Grenade_blowup(position, force, radius, grenade: Grenade) -> void:
+func _on_Grenade_blowup(position, _force, radius: float, grenade: Grenade, explosive: Explosive) -> void:
+	explosive.grenade_exploded()
 	var cell_index = map.world_to_map(position)
 	var blocks = map.get_blocks(cell_index, radius, grenade.filter)
 	var blocks_to_spawn = []

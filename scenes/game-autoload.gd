@@ -1,6 +1,7 @@
 extends Node
 
 var DEBUG = true
+var MAX_EXPLOSIVE = 5
 
 enum BLOCK_TYPE {
 	SAND = 6,
@@ -23,13 +24,13 @@ enum TOOL_QUALITY {
 
 var is_shovel_unlocked = false
 var is_bucket_unlocked = false
-var is_explosive_unlocked = false
+var is_explosive_unlocked = true
 
 var player_money = 0
 var player_tools = {
 	"shovel": TOOL_QUALITY.BASIC,
 	"bucket": TOOL_QUALITY.BASIC,
-	"explosive": 0
+	"explosive": 20
 }
 
 var shop = {
