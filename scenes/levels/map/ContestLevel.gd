@@ -7,7 +7,7 @@ var BlockScene = preload("res://scenes/DirtBlock.tscn")
 
 onready var countdown_label: Label = $CanvasLayer/CountdownStart
 onready var game_timer_label: Label = $CanvasLayer/Countdown
-onready var map: BaseTilemap = $Competion01
+onready var map: BaseTilemap = $Tilemap
 
 onready var startup_timer: Timer = $StartupTimer
 onready var game_timer: Timer = $GameTimer
@@ -32,11 +32,11 @@ func reset_level() -> void:
 
 func start() -> void:
 	if GameAutoload.DEBUG:
-		start_competition() # TODO remove
+		start_contest()
 	else:
 		startup_timer.start(1.0)
 
-func start_competition() -> void:
+func start_contest() -> void:
 	game_start = true
 	set_player_control(true)
 	game_timer.start()
@@ -89,7 +89,7 @@ func _on_StartupTimer_timeout():
 	if sec_start == 0:
 		countdown_label.hide()
 		startup_timer.stop()
-		start_competition()
+		start_contest()
 	else:
 		countdown_label.show()
 		countdown_label.text = "%s" % sec_start

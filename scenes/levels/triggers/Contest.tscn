@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64.5181, 61.9812 )
 
-[node name="Competition" instance=ExtResource( 1 )]
+[node name="Contest" instance=ExtResource( 1 )]
 trigger_name = "competition"
 is_interactible = true
 

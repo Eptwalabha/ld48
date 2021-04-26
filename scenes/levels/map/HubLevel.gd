@@ -23,7 +23,7 @@ func _process(_delta) -> void:
 	if Input.is_action_just_pressed("action") and current_state == HUB_STATE.PLAYING:
 		match current_trigger:
 			"shop": on_shop_interact()
-			"competition": on_competition_interact()
+			"contest": on_contest_interact()
 			_: pass
 
 func show_interact(show: bool) -> void:
@@ -45,12 +45,12 @@ func on_shop_interact() -> void:
 	camera_target = $Shop/CameraFocus
 	$CanvasLayer/MenuShop.open()
 
-func on_competition_interact() -> void:
+func on_contest_interact() -> void:
 	show_interact(false)
 	current_state = HUB_STATE.MENU
 	set_player_control(false)
-	camera_target = $Competition/CameraFocus
-	$CanvasLayer/MenuCompetition.open()
+	camera_target = $Contest/CameraFocus
+	$CanvasLayer/MenuContest.open()
 
 func _on_MenuShop_close_menu():
 	show_interact(true)
@@ -58,8 +58,9 @@ func _on_MenuShop_close_menu():
 	set_player_control(true)
 	camera_target = $Player
 
-func _on_MenuCompetition_close_menu():
+func _on_MenuContest_close_menu():
 	show_interact(true)
 	current_state = HUB_STATE.PLAYING
 	set_player_control(true)
 	camera_target = $Player
+
