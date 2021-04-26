@@ -116,7 +116,7 @@ config/description="Ludum dare #48
 theme: \"Deeper and deeper\"
 author: eptwalabha
 date: 2021-04-24"
-run/main_scene="res://scenes/levels/map/HubLevel.tscn"
+run/main_scene="res://scenes/splash-screen/SplashScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
