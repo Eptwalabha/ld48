@@ -45,6 +45,11 @@ _global_script_classes=[ {
 "path": "res://scenes/player/tools/Grenade.gd"
 }, {
 "base": "Node2D",
+"class": "KidLine",
+"language": "GDScript",
+"path": "res://scenes/ui/KidLine.gd"
+}, {
+"base": "Node2D",
 "class": "Level",
 "language": "GDScript",
 "path": "res://scenes/levels/Level.gd"
@@ -102,6 +107,7 @@ _global_script_class_icons={
 "Explosive": "",
 "GameOverlay": "",
 "Grenade": "",
+"KidLine": "",
 "Level": "",
 "MapTrigger": "",
 "MenuContest": "",

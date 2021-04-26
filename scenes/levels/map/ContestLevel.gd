@@ -4,6 +4,7 @@ signal end_of_theard(thread)
 
 var GrenadeScene = preload("res://scenes/player/tools/Grenade.tscn")
 var BlockScene = preload("res://scenes/DirtBlock.tscn")
+var KidLineScene = preload("res://scenes/ui/KidLine.tscn")
 
 onready var line = $Line
 onready var game_timer_label: Label = $CanvasLayer/Countdown
@@ -15,13 +16,16 @@ var sec_start: int = 4
 var game_start: bool = false
 var cursor_last_cell_index = null
 var display_line_depth = false
+var contestants = []
 
 func _ready() -> void:
+	randomize()
 	set_camera_limit(-400, 1800, 16, 1264)
 	reset_level()
 	start()
 
 func reset_level() -> void:
+	generate_contestants_results()
 	line.visible = false
 	tool_ui.visible = false
 	game_start = false
@@ -44,6 +48,22 @@ func start_contest() -> void:
 	set_player_control(true)
 	game_timer.start(GameAutoload.current_contest["duration"] * 60.0)
 	game_timer_label.show()
+
+func generate_contestants_results() -> void:
+	contestants = []
+	var results = GameAutoload.current_contest["results"]
+	var min_r = results[0]
+	var diff = results[1] - min_r
+	for i in range(0, 5):
+		var depth = randi() % diff + min_r
+		var kid_name = "kid %s" % i
+		contestants.push_back({
+			"name": kid_name,
+			"depth": depth
+		})
+		var kid_marker = KidLineScene.instance()
+		$KidsLine.add_child(kid_marker)
+		kid_marker.initialize(i, depth)
 
 func _process(_delta: float) -> void:
 	if !game_start:
@@ -174,8 +194,9 @@ func _on_Grenade_blowup(position, _force, radius: float, grenade: Grenade, explo
 				"velocity": (block_position - position).normalized() * grenade.force,
 			})
 		else:
-			map.set_cellv(block, -1)
-			map.update_bitmask_area(block)
+			if game_start:
+				map.set_cellv(block, -1)
+				map.update_bitmask_area(block)
 	if len(blocks_to_spawn) == 0:
 		return
 	var thread = Thread.new()
@@ -216,5 +237,15 @@ func end_level() -> void:
 
 func _on_CompetitionLevel_fadeout_end():
 	if !game_start:
+		var podium = 0
+		for contestant in contestants:
+			if contestant["depth"] > final_depth:
+				podium += 1
+		GameAutoload.last_results = {
+			"id": GameAutoload.current_id,
+			"depth": final_depth,
+			"contestants": contestants,
+			"podium": podium
+		}
 		var _osef = get_tree().change_scene("res://scenes/levels/map/HubLevel.tscn")
-		GameAutoload.save_result(final_depth, 0)
+		GameAutoload.save_result()

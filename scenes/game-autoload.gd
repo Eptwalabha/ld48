@@ -105,6 +105,7 @@ var contests = [
 
 var current_contest = null if !DEBUG else contests[0]
 var current_id = -1 if !DEBUG else 0
+var last_results = null
 
 func can_contest(_id: int) -> bool:
 	return unlocked["shovel"]
@@ -113,7 +114,11 @@ func set_current_contest(id: int) -> void:
 	current_contest = contests[id]
 	current_id = id
 
-func save_result(depth: int, podium: int) -> void:
+func save_result() -> void:
+	if last_results == null:
+		return
+	var depth = last_results["depth"]
+	var podium = last_results["podium"]
 	if podium < 3:
 		var old_podium = contests[current_id]["podium"]
 		if old_podium == -1:
@@ -121,4 +126,3 @@ func save_result(depth: int, podium: int) -> void:
 		else:
 			contests[current_id]["podium"] = min(podium, old_podium)
 	contests[current_id]["best"] = max(depth, contests[current_id]["best"])
-	print(contests[current_id])
