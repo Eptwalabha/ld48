@@ -8,7 +8,7 @@ export(bool) var active = true
 export(bool) var is_interactible = false
 
 func _ready() -> void:
-	$Label.text = tr(trigger_name)
+	$Label.text = tr("trigger_%s" % trigger_name)
 	$Label.visible = false
 
 func _on_Area2D_body_entered(body):

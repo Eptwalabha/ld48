@@ -29,26 +29,26 @@ __meta__ = {
 }
 
 [node name="Name" type="Label" parent="Dialog/Item"]
-margin_right = 332.0
+margin_right = 300.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
-align = 1
+align = 2
 valign = 1
 
 [node name="Description" type="Label" parent="Dialog/Item"]
 margin_top = 37.0
-margin_right = 332.0
+margin_right = 300.0
 margin_bottom = 69.0
 rect_min_size = Vector2( 0, 32 )
-align = 1
+align = 2
 valign = 1
 
 [node name="Price" type="Label" parent="Dialog/Item"]
 margin_top = 74.0
-margin_right = 332.0
+margin_right = 300.0
 margin_bottom = 106.0
 rect_min_size = Vector2( 0, 32 )
-align = 1
+align = 2
 valign = 1
 
 [node name="Dialog" type="VBoxContainer" parent="Dialog"]

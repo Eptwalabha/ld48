@@ -213,6 +213,10 @@ action_previous_tool={
 2d_physics/layer_4="trigger"
 2d_physics/layer_5="level-limit"
 
+[locale]
+
+translations=PoolStringArray( "res://assets/translations/ld48.en.translation" )
+
 [physics]
 
 common/enable_pause_aware_picking=true

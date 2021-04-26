@@ -99,7 +99,7 @@ func _on_btn_hover(item_type: String, item_quality: int) -> void:
 	var description = "shop_item_description_%s_%s" % [item_type, item_quality]
 	dialog_item_name.text = tr(name)
 	dialog_item_description.text = tr(description)
-	dialog_item_price.text = tr("shop_item_price") + str(item_price(item_type, item_quality))
+	dialog_item_price.text = tr("shop_item_price") % [item_price(item_type, item_quality)]
 	dialog_dialog.visible = false
 	dialog_item.visible = true
 
