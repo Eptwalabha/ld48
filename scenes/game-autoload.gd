@@ -116,6 +116,8 @@ func set_current_contest(id: int) -> void:
 	current_id = id
 
 func save_result() -> void:
+	if current_id == 3:
+		unlocked["explosive"] = true
 	if last_results == null:
 		return
 	var depth = last_results["depth"]

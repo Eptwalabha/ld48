@@ -489,11 +489,10 @@ position = Vector2( -0.75, -30.5 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 30 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="SpadePivot" type="Node2D" parent="Pivot"]
-position = Vector2( -12.8661, -20.259 )
+position = Vector2( -12.9195, -20.9529 )
 rotation = -0.746176
 __meta__ = {
 "_edit_group_": true
