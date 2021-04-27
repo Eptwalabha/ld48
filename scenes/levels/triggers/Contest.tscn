@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/levels/triggers/MapTrigger.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/levels/prop/Adulte.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/images/items.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64.5181, 61.9812 )
@@ -12,3 +14,21 @@ is_interactible = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2( 0, -57.1808 )
 shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2( 0.707108, -26.8701 )
+scale = Vector2( 1.43132, 1.36472 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 221, 187, 110, 46 )
+
+[node name="Adulte" parent="Sprite" index="0" instance=ExtResource( 2 )]
+position = Vector2( 17.7849, -23.3159 )
+scale = Vector2( 0.698655, 0.732749 )
+frame = 2
+flip_h = true
+
+[node name="Sprite" type="Sprite" parent="Sprite" index="1"]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 219, 135, 122, 47 )
