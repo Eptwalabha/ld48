@@ -30,3 +30,7 @@ region_rect = Rect2( 1, 67, 128, 138 )
 [node name="Adulte" parent="." index="2" instance=ExtResource( 3 )]
 position = Vector2( -73.1578, -54.6581 )
 frame = 2
+
+[node name="Label" parent="." index="3"]
+margin_top = -153.884
+margin_bottom = -123.884

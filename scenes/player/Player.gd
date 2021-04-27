@@ -49,6 +49,7 @@ var current_tool: PlayerTool = null
 var available_tools: Array = []
 
 func _ready():
+	$AnimationTree.active = true
 	initialize_tools()
 	state_machine = anim_tree.get("parameters/playback")
 	var hj = j_duration / 2.0
