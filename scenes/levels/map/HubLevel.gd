@@ -75,3 +75,7 @@ func _on_MenuContest_enter_contest(id):
 		fade(false)
 		yield(self, "fadeout_end")
 		var _osef = get_tree().change_scene("res://scenes/levels/map/ContestLevel.tscn")
+
+
+func _on_MenuShop_update_player_equipment():
+	$Player.initialize_tools()

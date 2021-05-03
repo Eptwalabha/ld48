@@ -1,5 +1,7 @@
 class_name MenuShop extends UIMenu
 
+signal update_player_equipment
+
 onready var dialog = $Dialog
 onready var dialog_item = $Dialog/Item
 onready var dialog_dialog = $Dialog/Dialog
@@ -14,6 +16,11 @@ onready var buy_btn = $MarginContainer/CenterContainer/Control/HBoxContainer/Buy
 onready var selection = $MarginContainer/CenterContainer/Control/Control/Selection
 
 var current_selection = null
+
+enum ITEM_STATE {
+	PURCHASABLE,
+	OWNED
+}
 
 func _ready():
 	visible = false
@@ -78,7 +85,7 @@ func is_btn_visible(item_type: String, target_quality: int) -> bool:
 				return target_quality == GameAutoload.TOOL_QUALITY.BASIC
 			else:
 				var current_quality = GameAutoload.player_tools[item_type]
-				return current_quality + 1 >= target_quality
+				return current_quality + 1 == target_quality
 		"bucket":
 			if !GameAutoload.unlocked["shovel"]:
 				return false
@@ -86,7 +93,7 @@ func is_btn_visible(item_type: String, target_quality: int) -> bool:
 				return target_quality == GameAutoload.TOOL_QUALITY.BASIC
 			else:
 				var current_quality = GameAutoload.player_tools[item_type]
-				return current_quality + 1 >= target_quality
+				return current_quality + 1 == target_quality
 		"explosive":
 			return GameAutoload.unlocked["explosive"]
 	return false
@@ -138,6 +145,7 @@ func _on_Buy_pressed():
 			GameAutoload.buy_item(type, quality)
 			update_btn_visiblity()
 			display_conversation("thank_you")
+			emit_signal("update_player_equipment")
 			current_selection = null
 		else:
 			display_conversation("not_enough_money")

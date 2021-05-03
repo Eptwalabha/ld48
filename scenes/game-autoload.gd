@@ -37,8 +37,8 @@ var unlocked = {
 
 var player_money = 10
 var player_tools = {
-	"shovel": TOOL_QUALITY.BASIC,
-	"bucket": TOOL_QUALITY.BASIC,
+	"shovel": TOOL_QUALITY.SUPER,
+	"bucket": TOOL_QUALITY.SUPER,
 	"explosive": 20
 }
 

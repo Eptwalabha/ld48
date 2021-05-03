@@ -58,12 +58,24 @@ func _ready():
 	gravity.y = 2 * (h / d)
 	jump = (h / d) * j_duration
 
+func _reset_tools() -> void:
+	shovel = null
+	bucket = null
+	explosive = null
+	current_tool = null
+	has_shovel = false
+	has_bucket = false
+	has_explosive = false
+	for a_tool in $Tools.get_children():
+		$Tools.remove_child(a_tool)
+
 func initialize_tools() -> void:
+	_reset_tools()
 	if GameAutoload.unlocked["shovel"]:
 		shovel = ShovelScene.instance()
 		shovel.initialize(GameAutoload.player_tools["shovel"])
 		shovel.connect("throw", self, "_on_Shovel_throw")
-		add_child(shovel)
+		$Tools.add_child(shovel)
 		available_tools.push_back(GameAutoload.TOOL_TYPE.SHOVEL)
 		current_tool = shovel
 		has_shovel = true
@@ -72,7 +84,7 @@ func initialize_tools() -> void:
 		bucket.initialize(GameAutoload.player_tools["bucket"])
 		bucket.connect("fill", self, "_on_Bucket_fill")
 		bucket.connect("empty", self, "_on_Bucket_empty")
-		add_child(bucket)
+		$Tools.add_child(bucket)
 		available_tools.push_back(GameAutoload.TOOL_TYPE.BUCKET)
 		current_tool = bucket
 		has_bucket = true
@@ -80,10 +92,12 @@ func initialize_tools() -> void:
 		explosive = ExplosiveScene.instance()
 		explosive.initialize(GameAutoload.player_tools["explosive"])
 		explosive.connect("spawn", self, "_on_Explosive_spawn")
-		add_child(explosive)
+		$Tools.add_child(explosive)
 		available_tools.push_back(GameAutoload.TOOL_TYPE.EXPLOSIVE)
 		current_tool = explosive
 		has_explosive = true
+
+	$Pivot/SpadePivot/spade.visible = has_shovel
 
 func set_control(control: bool) -> void:
 	can_move = control

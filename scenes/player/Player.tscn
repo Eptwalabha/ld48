@@ -4,83 +4,82 @@
 [ext_resource path="res://assets/images/spade.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/player.png" type="Texture" id=4]
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 64, 128 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 4 )
 region = Rect2( 64, 0, 64, 128 )
 
-[sub_resource type="AtlasTexture" id=34]
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 128, 64, 128 )
+
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 4 )
 region = Rect2( 128, 128, 64, 128 )
 
-[sub_resource type="AtlasTexture" id=31]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 4 )
 region = Rect2( 128, 128, 64, 128 )
 
-[sub_resource type="AtlasTexture" id=32]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 4 )
 region = Rect2( 192, 128, 64, 128 )
 
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 4 )
-region = Rect2( 64, 128, 64, 128 )
-
-[sub_resource type="AtlasTexture" id=26]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 64, 128 )
 
-[sub_resource type="AtlasTexture" id=27]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 4 )
 region = Rect2( 192, 0, 64, 128 )
 
-[sub_resource type="AtlasTexture" id=28]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 128, 64, 128 )
 
-[sub_resource type="AtlasTexture" id=29]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 4 )
 region = Rect2( 64, 128, 64, 128 )
 
-[sub_resource type="SpriteFrames" id=30]
+[sub_resource type="SpriteFrames" id=11]
 animations = [ {
-"frames": [ SubResource( 24 ), SubResource( 25 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.0
 }, {
-"frames": [ SubResource( 34 ) ],
-"loop": true,
-"name": "dig",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 31 ), SubResource( 32 ) ],
-"loop": true,
-"name": "jump",
-"speed": 3.0
-}, {
-"frames": [ SubResource( 33 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "wallride",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "dig",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "jump",
+"speed": 3.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "run",
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=12]
 radius = 13.0
 height = 16.0
 
-[sub_resource type="RayShape2D" id=2]
+[sub_resource type="RayShape2D" id=13]
 length = 16.0
 
-[sub_resource type="Animation" id=3]
-resource_name = "dig"
+[sub_resource type="Animation" id=14]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/SpadePivot:position")
@@ -169,8 +168,7 @@ tracks/6/keys = {
 "values": [ Vector2( 5.96046e-08, -26.5 ), Vector2( 5.96046e-08, -25 ), Vector2( -1.5, -27.5 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "idle"
+[sub_resource type="Animation" id=15]
 length = 1.4
 loop = true
 tracks/0/type = "value"
@@ -246,8 +244,7 @@ tracks/5/keys = {
 "values": [ Vector2( -0.75, -30.5 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "jump"
+[sub_resource type="Animation" id=16]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -311,8 +308,7 @@ tracks/4/keys = {
 "values": [ 0.0, -5.70795, 6.95068, 0.0 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "move"
+[sub_resource type="Animation" id=17]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -376,8 +372,7 @@ tracks/4/keys = {
 "values": [ -46.8196, -86.1546, -46.8196 ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "wallriding"
+[sub_resource type="Animation" id=18]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -415,64 +410,64 @@ tracks/2/keys = {
 "values": [ Vector2( -0.75, -30.5 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "dig"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "jump"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "move"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=23]
 animation = "wallriding"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
 advance_condition = "moving"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
 advance_condition = "not_moving"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
 advance_condition = "grounded"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
 advance_condition = "not_grounded"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
 advance_condition = "not_grounded"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
 advance_condition = "wallriding"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
 advance_condition = "not_wallriding"
 
-[sub_resource type="AnimationNodeStateMachine" id=22]
-states/dig/node = SubResource( 8 )
+[sub_resource type="AnimationNodeStateMachine" id=33]
+states/dig/node = SubResource( 19 )
 states/dig/position = Vector2( 594, 81 )
-states/idle/node = SubResource( 9 )
+states/idle/node = SubResource( 20 )
 states/idle/position = Vector2( 231, 81 )
-states/jump/node = SubResource( 10 )
+states/jump/node = SubResource( 21 )
 states/jump/position = Vector2( 594, 198 )
-states/move/node = SubResource( 11 )
+states/move/node = SubResource( 22 )
 states/move/position = Vector2( 231, 198 )
-states/wallriding/node = SubResource( 12 )
+states/wallriding/node = SubResource( 23 )
 states/wallriding/position = Vector2( 779, 141 )
-transitions = [ "idle", "dig", SubResource( 13 ), "dig", "idle", SubResource( 14 ), "idle", "move", SubResource( 15 ), "move", "idle", SubResource( 16 ), "jump", "idle", SubResource( 17 ), "idle", "jump", SubResource( 18 ), "move", "jump", SubResource( 19 ), "jump", "wallriding", SubResource( 20 ), "wallriding", "jump", SubResource( 21 ) ]
+transitions = [ "idle", "dig", SubResource( 24 ), "dig", "idle", SubResource( 25 ), "idle", "move", SubResource( 26 ), "move", "idle", SubResource( 27 ), "jump", "idle", SubResource( 28 ), "idle", "jump", SubResource( 29 ), "move", "jump", SubResource( 30 ), "jump", "wallriding", SubResource( 31 ), "wallriding", "jump", SubResource( 32 ) ]
 start_node = "idle"
 graph_offset = Vector2( 123, 51 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=34]
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 30
@@ -487,8 +482,9 @@ position = Vector2( 5, -32 )
 modulate = Color( 0.0823529, 0.231373, 0.54902, 1 )
 position = Vector2( -0.75, -30.5 )
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 30 )
+frames = SubResource( 11 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="SpadePivot" type="Node2D" parent="Pivot"]
@@ -511,11 +507,11 @@ collision_mask = 2
 
 [node name="Capsule" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -34 )
-shape = SubResource( 1 )
+shape = SubResource( 12 )
 
 [node name="Base" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -16 )
-shape = SubResource( 2 )
+shape = SubResource( 13 )
 one_way_collision_margin = 3.0
 
 [node name="FloorL" type="RayCast2D" parent="."]
@@ -543,19 +539,21 @@ cast_to = Vector2( -80, 0 )
 collision_mask = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/dig = SubResource( 3 )
-anims/idle = SubResource( 4 )
-anims/jump = SubResource( 5 )
-anims/move = SubResource( 6 )
-anims/wallriding = SubResource( 7 )
+anims/dig = SubResource( 14 )
+anims/idle = SubResource( 15 )
+anims/jump = SubResource( 16 )
+anims/move = SubResource( 17 )
+anims/wallriding = SubResource( 18 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 22 )
+tree_root = SubResource( 33 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 23 )
+parameters/playback = SubResource( 34 )
 parameters/conditions/grounded = false
 parameters/conditions/moving = false
 parameters/conditions/not_grounded = false
 parameters/conditions/not_moving = false
 parameters/conditions/not_wallriding = false
 parameters/conditions/wallriding = false
+
+[node name="Tools" type="Node" parent="."]

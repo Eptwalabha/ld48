@@ -67,5 +67,6 @@ visible = false
 visible = false
 
 [connection signal="close_menu" from="CanvasLayer/MenuShop" to="." method="_on_MenuShop_close_menu"]
+[connection signal="update_player_equipment" from="CanvasLayer/MenuShop" to="." method="_on_MenuShop_update_player_equipment"]
 [connection signal="close_menu" from="CanvasLayer/MenuContest" to="." method="_on_MenuContest_close_menu"]
 [connection signal="enter_contest" from="CanvasLayer/MenuContest" to="." method="_on_MenuContest_enter_contest"]
