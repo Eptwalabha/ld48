@@ -11,6 +11,7 @@ offsets = PoolRealArray( 0, 0.642384 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="Animation" id=2]
+resource_name = "intro"
 length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control2:modulate")
@@ -94,6 +95,7 @@ margin_right = 430.0
 margin_bottom = 299.0
 
 [node name="Logo2" type="TextureRect" parent="Control2/VBoxContainer/MarginContainer2/CenterContainer"]
+visible = false
 modulate = Color( 1, 1, 1, 0.368627 )
 margin_right = 400.0
 margin_bottom = 269.0
@@ -134,7 +136,18 @@ texture = ExtResource( 4 )
 stretch_mode = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "fade-in"
-anims/fade-in = SubResource( 2 )
+autoplay = "intro"
+anims/intro = SubResource( 2 )
+
+[node name="FadeOut" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
