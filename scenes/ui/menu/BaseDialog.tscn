@@ -1,0 +1,104 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/fonts/font_title.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/ui/menu/BaseDialog.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/font_text.tres" type="DynamicFont" id=3]
+
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.956863, 0.454902, 0.113725, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+shadow_offset = Vector2( 1, 1 )
+
+[node name="BaseDialog" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 349.0
+margin_top = 88.0
+margin_right = -57.0
+margin_bottom = -63.0
+theme = SubResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.32549, 0.341176, 0.419608, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 618.0
+margin_bottom = 44.0
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/Control"]
+margin_right = 618.0
+margin_bottom = 44.0
+color = Color( 0.760784, 0.760784, 0.760784, 0.588235 )
+
+[node name="CenterContainer" type="MarginContainer" parent="VBoxContainer/Control"]
+margin_right = 618.0
+margin_bottom = 44.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 5
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control/CenterContainer"]
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 608.0
+margin_bottom = 39.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBoxContainer/Control/CenterContainer/HBoxContainer"]
+margin_right = 562.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "title"
+align = 1
+valign = 1
+
+[node name="Close" type="ToolButton" parent="VBoxContainer/Control/CenterContainer/HBoxContainer"]
+margin_left = 566.0
+margin_top = 1.0
+margin_right = 598.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_vertical = 4
+custom_styles/hover = SubResource( 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "x"
+flat = false
+
+[node name="Body" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 44.0
+margin_right = 618.0
+margin_bottom = 449.0
+size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/Control/CenterContainer/HBoxContainer/Close" to="." method="_on_Close_pressed"]

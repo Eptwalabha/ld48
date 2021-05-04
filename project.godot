@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "BaseDialog",
+"language": "GDScript",
+"path": "res://scenes/ui/menu/BaseDialog.gd"
+}, {
 "base": "TileMap",
 "class": "BaseTilemap",
 "language": "GDScript",
@@ -84,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/tools/PlayerTool.gd"
 }, {
+"base": "BaseDialog",
+"class": "QuitDialog",
+"language": "GDScript",
+"path": "res://scenes/ui/menu/QuitDialog.gd"
+}, {
 "base": "PlayerTool",
 "class": "Shovel",
 "language": "GDScript",
@@ -105,6 +115,7 @@ _global_script_classes=[ {
 "path": "res://scenes/ui/UITool.gd"
 } ]
 _global_script_class_icons={
+"BaseDialog": "",
 "BaseTilemap": "",
 "BlockSelector": "",
 "Bucket": "",
@@ -120,6 +131,7 @@ _global_script_class_icons={
 "MenuShop": "",
 "Player": "",
 "PlayerTool": "",
+"QuitDialog": "",
 "Shovel": "",
 "UIMenu": "",
 "UIQuitGame": "",

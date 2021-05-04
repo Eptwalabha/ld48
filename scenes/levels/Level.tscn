@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/levels/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ui/QuitGame.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/ui/menu/QuitDialog.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.0239044, 0.163347, 0.864542 )
@@ -106,6 +107,12 @@ __meta__ = {
 anims/fade-in = SubResource( 3 )
 anims/fade-out = SubResource( 4 )
 
-[node name="UIQuitGame" parent="CanvasLayer" instance=ExtResource( 3 )]
+[node name="QuitDialog" parent="CanvasLayer" instance=ExtResource( 4 )]
 
+[node name="UIQuitGame" parent="CanvasLayer" instance=ExtResource( 3 )]
+visible = false
+
+[connection signal="dialog_closed" from="CanvasLayer/QuitDialog" to="." method="_on_QuitDialog_dialog_closed"]
+[connection signal="quit_game" from="CanvasLayer/QuitDialog" to="." method="_on_QuitDialog_quit_game"]
+[connection signal="close_window" from="CanvasLayer/UIQuitGame" to="." method="_on_UIQuitGame_close_window"]
 [connection signal="quit_game" from="CanvasLayer/UIQuitGame" to="." method="_on_UIQuitGame_quit_game"]

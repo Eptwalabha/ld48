@@ -90,10 +90,10 @@ margin_bottom = 144.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/Control"]
-margin_left = 123.0
-margin_top = 34.0
-margin_right = 243.0
-margin_bottom = 58.0
+margin_left = 116.0
+margin_top = 37.0
+margin_right = 251.0
+margin_bottom = 54.0
 text = "quit_the_game"
 align = 1
 
