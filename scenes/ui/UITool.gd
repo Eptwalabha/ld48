@@ -5,13 +5,16 @@ signal tool_clicked(tool_type)
 onready var shovel_btn = $MarginContainer/HBoxContainer/Shovel
 onready var bucket_btn = $MarginContainer/HBoxContainer/Bucket
 onready var explosive_btn = $MarginContainer/HBoxContainer/Explosive
+onready var explosive_counter = $MarginContainer/HBoxContainer/Explosive/Label
 
 var current_tool: int = -1
 
 func set_button(shovel: bool, bucket: bool, explosive: bool) -> void:
 	shovel_btn.visible = shovel
 	bucket_btn.visible = bucket
-	explosive_btn.visible = explosive
+	var nbr_grenade = GameAutoload.player_tools["explosive"]
+	explosive_btn.visible = explosive and nbr_grenade > 0
+	explosive_counter.text = str(nbr_grenade)
 
 func set_bucket_fullness(is_full: bool) -> void:
 	var a = bucket_btn.modulate.a
@@ -26,6 +29,11 @@ func set_current(current: int) -> void:
 	highlight_btn(shovel_btn, current == GameAutoload.TOOL_TYPE.SHOVEL)
 	highlight_btn(bucket_btn, current == GameAutoload.TOOL_TYPE.BUCKET)
 	highlight_btn(explosive_btn, current == GameAutoload.TOOL_TYPE.EXPLOSIVE)
+
+func update_grenade_count() -> void:
+	var nbr_grenade = GameAutoload.player_tools["explosive"]
+	explosive_btn.visible = nbr_grenade > 0
+	explosive_counter.text = str(nbr_grenade)
 
 func highlight_btn(btn: Control, highlight: bool) -> void:
 	btn.get_node("Logo").rect_scale = Vector2(0.9, 0.9) if highlight else Vector2(0.7, 0.7)

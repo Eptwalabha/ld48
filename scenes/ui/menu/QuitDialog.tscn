@@ -38,11 +38,11 @@ margin_right = 474.0
 margin_right = 464.0
 
 [node name="Title" parent="VBoxContainer/Control/CenterContainer/HBoxContainer" index="0"]
-margin_right = 408.0
+margin_right = 418.0
 text = "warning"
 
 [node name="Close" parent="VBoxContainer/Control/CenterContainer/HBoxContainer" index="1"]
-margin_left = 412.0
+margin_left = 422.0
 margin_right = 454.0
 
 [node name="Body" parent="VBoxContainer" index="1"]
@@ -50,9 +50,9 @@ margin_right = 474.0
 margin_bottom = 325.0
 
 [node name="Label" type="Label" parent="VBoxContainer/Body" index="0"]
-margin_top = 128.0
+margin_top = 132.0
 margin_right = 474.0
-margin_bottom = 145.0
+margin_bottom = 149.0
 text = "quit_the_game"
 align = 1
 

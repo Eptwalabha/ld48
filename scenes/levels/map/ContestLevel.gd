@@ -172,6 +172,10 @@ func _on_Player_fill_bucket(cell: Vector2, capacity_left: int, bucket: Bucket):
 		tool_ui.set_bucket_fullness(true)
 
 func _on_Player_spawn_explosive(_position, direction, explosive):
+	if GameAutoload.player_tools["explosive"] == 0:
+		return
+	GameAutoload.player_tools["explosive"] -= 1
+	tool_ui.update_grenade_count()
 	var grenade = GrenadeScene.instance()
 	var throw_position: Vector2 = player.throw_position.global_position
 	grenade.initialize(throw_position, direction, explosive.filter)

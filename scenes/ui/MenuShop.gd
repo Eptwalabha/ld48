@@ -64,19 +64,17 @@ func update_btn_visiblity():
 	shovels_line.visible = true
 	buckets_line.visible = GameAutoload.unlocked["shovel"]
 	explosives_line.visible = GameAutoload.unlocked["explosive"]
-	
-	if shovels_line.visible:
-		update_btn_visibility_line(shovels_line, "shovel")
-	if buckets_line.visible:
-		update_btn_visibility_line(buckets_line, "bucket")
+	update_btn_visibility_line(shovels_line, "shovel")
+	update_btn_visibility_line(buckets_line, "bucket")
+	update_btn_visibility_line(explosives_line, "explosive")
 	
 func update_btn_visibility_line(node: Node, type: String) -> void:
 	var basic = node.get_node("HBoxContainer/BASIC")
 	var nice = node.get_node("HBoxContainer/NICE")
 	var super = node.get_node("HBoxContainer/SUPER")
-	basic.disabled = !is_btn_visible(type, GameAutoload.TOOL_QUALITY.BASIC)
-	nice.disabled = !is_btn_visible(type, GameAutoload.TOOL_QUALITY.NICE)
-	super.disabled = !is_btn_visible(type, GameAutoload.TOOL_QUALITY.SUPER)
+	basic.disabled = !node.visible or !is_btn_visible(type, GameAutoload.TOOL_QUALITY.BASIC)
+	nice.disabled = !node.visible or !is_btn_visible(type, GameAutoload.TOOL_QUALITY.NICE)
+	super.disabled = !node.visible or !is_btn_visible(type, GameAutoload.TOOL_QUALITY.SUPER)
 
 func is_btn_visible(item_type: String, target_quality: int) -> bool:
 	match item_type:

@@ -1,7 +1,7 @@
 extends Node
 
 var DEBUG = false
-var MAX_EXPLOSIVE = 6
+var MAX_EXPLOSIVE = 99
 
 enum BLOCK_TYPE {
 	SAND = 6,
@@ -25,9 +25,14 @@ func item_price(item_type: String, item_quality: int) -> int:
 	return shop["items"][item_type][item_quality]["price"]
 
 func buy_item(type, quality) -> void:
-	unlocked[type] = true
-	player_money -= item_price(type, quality)
-	player_tools[type] = quality
+	match type:
+		"explosive":
+			var nbr = shop["items"]["explosive"][quality]["amount"]
+			player_tools["explosive"] = min(player_tools["explosive"] + nbr, MAX_EXPLOSIVE)
+		_:
+			unlocked[type] = true
+			player_tools[type] = quality
+	player_money = max(0, player_money - item_price(type, quality))
 
 var unlocked = {
 	"shovel": false or DEBUG,
@@ -39,7 +44,7 @@ var player_money = 10
 var player_tools = {
 	"shovel": TOOL_QUALITY.SUPER,
 	"bucket": TOOL_QUALITY.SUPER,
-	"explosive": 20
+	"explosive": 0
 }
 
 var shop = {
@@ -95,6 +100,8 @@ var shop = {
 	}
 }
 
+var unlock_explosive_at_level = 3
+
 var contests = [
 	{ "duration": 0.5,	"price": [50, 30, 10],	"results": [4, 8],		"podium": -1,	"best": 0 },
 	{ "duration": 1.0,	"price": [80, 50, 20],	"results": [10, 14],		"podium": -1,	"best": 0 },
@@ -116,7 +123,7 @@ func set_current_contest(id: int) -> void:
 	current_id = id
 
 func save_result() -> void:
-	if current_id == 3:
+	if current_id == unlock_explosive_at_level:
 		unlocked["explosive"] = true
 	if last_results == null:
 		return
